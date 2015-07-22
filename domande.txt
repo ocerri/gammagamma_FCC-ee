@@ -1,0 +1,11 @@
+pythia->SetMSTP(81,1); cosa fa? Secondo noi abilita interazioni multiple
+
+pythia MSTJ(22,2) fa decadere tutte le particelle con c\tau < 10 mm oppure
+decadono con una certa probabilità (esponenzialmente)?
+
+Cosa vuol dire “min-bias QCD”?
+
+Perché usiamo la pseudorapidità e non la rapidità?
+Che cosa rappresentano i grafici che dobbiamo riprodurre?
+
+Delta(eta) è invariante relativistico? La distribuzione in eta è piatta?
