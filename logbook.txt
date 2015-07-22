@@ -30,3 +30,6 @@ ctau 10m i K0 non decadono e quindi non li vedo perche non sono nelle particelle
   e' quasi sempre minore dei 50GeV
 
 - Devo avere almeno 3GeV nel ECAL
+
+- CI sarebbe da mettere anche l'energia transeversa mancante sia
+  minore di 5 GeV; 
