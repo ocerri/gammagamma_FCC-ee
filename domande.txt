@@ -13,12 +13,14 @@ Delta(eta) è invariante relativistico? La distribuzione in eta è
 piatta?
 
 Che vuol dire tagged or untagged e+/e-?
-e Anti tagged?
+e Anti tagging?
 
 TAGLI da fare:
 - Mettere nelle distribuzioni solo gli  ADRONI CARICHI(come li
 seleziono?) e i K0s:
-il K0s ha un ctau di 2.68 cm
+il K0s ha un ctau di 2.68 cm e decade in pioni...Li dovrei rivelare.
+Quindi metto i K0 negli histo, oppure lo faccio decadere in pioni e ci
+metto quelli??
 
 - elettroni in arrivo scatterati a meno di 33 mrad, ci sarebbe stato
   il cut sull'energia rilasciata nei calorimetri minore di 50GeV ma
