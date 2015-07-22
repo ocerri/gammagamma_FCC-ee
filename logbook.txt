@@ -21,6 +21,8 @@ seleziono?) e i K0s:
 il K0s ha un ctau di 2.68 cm e decade in pioni...Li dovrei rivelare.
 Quindi metto i K0 negli histo, oppure lo faccio decadere in pioni e ci
 metto quelli??
+NO I K0 non vanno messi nelle distribuzioni e settando la decay zone a
+ctau 10m i K0 non decadono e quindi non li vedo perche non sono nelle particelle cariche
 
 - elettroni in arrivo scatterati a meno di 33 mrad, ci sarebbe stato
   il cut sull'energia rilasciata nei calorimetri minore di 50GeV ma
