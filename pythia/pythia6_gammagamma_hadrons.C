@@ -228,7 +228,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
     //  if (debug) cout << "############ EVENT " << ievt << " #############" << endl;
     //	dumpEvent( pythia );
 
-    if ( passEvtSelection(pythia)==false ) {
+    if ( passEvtSelection(pythia)==false ) { ///Cut on W!!!!!!!!!!!!!!!
       exclEvts++;
       continue;
     }
@@ -263,11 +263,13 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
       double ptPartic = partic->Pt();
       double etaPartic = partic->Eta();
       //phiPartic = partic->Phi();
+
+      if ( ptPartic<0.12 ) continue; //cut on Pt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       
       // Histo filling
-      if (abs(etaPartic)<1.5){ //Fill only if |eta|<1.5
-	hdsigmadeta->Fill(abs(etaPartic));
-      }
+      if (abs(etaPartic)>1.5) continue; //Fill only if |eta|<1.5!!!!!!!!!!!!!!!!!!!!!
+
+      hdsigmadeta->Fill(abs(etaPartic));
       
       // if (TMath::Abs(etaPartic)<etaRange) {
       hdsigmadpT->Fill(ptPartic);
@@ -338,13 +340,20 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
   // Plot distributions for cross-check
 
 //   //hEdsigmadpT->Rebin(4);
-//   char title[300];
-//   sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
-//   TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
-//   cinvdsigmadpT->SetLogy();
-//   cinvdsigmadpT->SetLogx();
-//   cinvdsigmadpT->cd();
-//   hdsigmadpT->Draw();
+   char title[300];
+   sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
+   TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
+   cinvdsigmadpT->SetLogy();
+   //cinvdsigmadpT->SetLogx();
+   cinvdsigmadpT->cd();
+   hdsigmadpT->Draw();
+
+   sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
+   TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
+   cinvdsigmadeta->cd();
+   hdsigmadeta->Draw();
+
+   
 
 }
 

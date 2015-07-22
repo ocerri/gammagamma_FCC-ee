@@ -93,7 +93,7 @@ void dumpEvent( TPythia6* pythia )
 bool passEvtSelection( TPythia6* pythia )
 {
 
-  return true;  // ACCEPT ALL EVENTS
+  //return true;  // ACCEPT ALL EVENTS
 
   
 
@@ -114,6 +114,10 @@ bool passEvtSelection( TPythia6* pythia )
   int N = particleArray->GetEntriesFast();
 
   // loop on event particles to check if it satisfies trigger cuts
+  Double_t EN_tot=0;
+  Double_t pz_tot=0;
+  Double_t px_tot=0;
+  Double_t py_tot=0;
 
   for (int ip=0; ip<N; ip++){
 
@@ -129,6 +133,13 @@ bool passEvtSelection( TPythia6* pythia )
 
     double etaPart = partic->Eta();
     double enPart = partic->Energy();
+
+    if ( abs(pdg)<11 || abs(pdg)>16 ){
+      EN_tot+= enPart;
+      pz_tot += partic->Pz();
+      px_tot += partic->Px();
+      py_tot += partic->Py();
+    }
 
     if ( charge!=0 && TMath::Abs(etaPart)<2. ) cntTrack = true;
 
@@ -147,6 +158,12 @@ bool passEvtSelection( TPythia6* pythia )
 
   }
 
+  Double_t W_gen = TMath::Sqrt(EN_tot*EN_tot - px_tot*px_tot - py_tot*py_tot - pz_tot*pz_tot );
+
+
+  if (W_gen<125 && W_gen>10) return true; //Cut on W !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  
 //   // The minbias trigger was a two-arm trigger that required at least two
 //   // charged particles in opposite rapidity hemispheres in the range 1.5 < eta <5.5.
 //   if ( trigger.Contains("ua1") && (fwdTrackplus1==true && fwdTrackminus1==true ) ) return true;
