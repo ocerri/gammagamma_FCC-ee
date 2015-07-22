@@ -262,7 +262,6 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
       //phiPartic = partic->Phi();
       
       // Histo filling
-
       hdsigmadeta->Fill(etaPartic);
       
       // if (TMath::Abs(etaPartic)<etaRange) {
@@ -273,6 +272,9 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
       // if (TMath::Abs(etaPartic)<1.) Nch++;
       
     } // End loop over all particles in event
+
+
+
     
     //hmulteta1->Fill(Nch);
 

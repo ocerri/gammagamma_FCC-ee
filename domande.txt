@@ -1,4 +1,5 @@
-pythia->SetMSTP(81,1); cosa fa? Secondo noi abilita interazioni multiple
+pythia->SetMSTP(81,1); cosa fa?
+Secondo noi abilita interazioni multiple
 
 pythia MSTJ(22,2) fa decadere tutte le particelle con c\tau < 10 mm oppure
 decadono con una certa probabilità (esponenzialmente)?
@@ -8,4 +9,20 @@ Cosa vuol dire “min-bias QCD”?
 Perché usiamo la pseudorapidità e non la rapidità?
 Che cosa rappresentano i grafici che dobbiamo riprodurre?
 
-Delta(eta) è invariante relativistico? La distribuzione in eta è piatta?
+Delta(eta) è invariante relativistico? La distribuzione in eta è
+piatta?
+
+Che vuol dire tagged or untagged e+/e-?
+e Anti tagged?
+
+TAGLI da fare:
+- Mettere nelle distribuzioni solo gli  ADRONI CARICHI(come li
+seleziono?) e i K0s:
+il K0s ha un ctau di 2.68 cm
+
+- elettroni in arrivo scatterati a meno di 33 mrad, ci sarebbe stato
+  il cut sull'energia rilasciata nei calorimetri minore di 50GeV ma
+  dai Montecarlo hanno visto che se ha meno di 33mrad allora l'energia
+  e' quasi sempre minore dei 50GeV
+
+- Devo avere almeno 3GeV nel ECAL
