@@ -17,7 +17,7 @@ e Anti tagging?
 
 TAGLI da fare:
 - Mettere nelle distribuzioni solo gli  ADRONI CARICHI(come li
-seleziono?) e i K0s:
+seleziono?):
 il K0s ha un ctau di 2.68 cm e decade in pioni...Li dovrei rivelare.
 Quindi metto i K0 negli histo, oppure lo faccio decadere in pioni e ci
 metto quelli??
