@@ -8,4 +8,4 @@ Cosa vuol dire “min-bias QCD”?
 Perché usiamo la pseudorapidità e non la rapidità?
 Che cosa rappresentano i grafici che dobbiamo riprodurre?
 
-Delta(eta) è invariante relativistico? La distribuzione in eta è piatta?
+Delta(eta) è invariante relativistico? La distribuzione in eta è piatta?Delta(eta) è invariante relativistico? La distribuzione in eta è piatta?
