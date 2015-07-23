@@ -72,4 +72,22 @@ To do:
 - implementare un programmino che faccia simulare 1000 eventi a pythia per 10 volte, unisca gli istogrammi e poi faccia il merge degli istogrammi. In questo modo possiamo simulare tanti eventi senza avere problemi di memoria
 
 
-
+23/06 pomeriggio
+Abbiamo lavorato su come usare i TTree.
+Per crearli gurdare la macro di mike cerokov_exp.
+Per leggerli Maurizio ci ha dato delle hint e poi siamo andati avanti.
+Per prima cosa se si ha un .root con un tree dentro:
+- lanciare $root nofile.root
+- $_file0->ls()  //Fa vedere cosa c'e' nel .root
+- $ nome_tree->Scan()  //serve solo a vedere come e' fatto il tree
+- $ nome_tree->MakeClass("NomeClasse") //Crea la classe e il .C
+Abbiamo quindi studiato com'e' fatta la classe.
+La classe ha direttamente un puntatore al tree da cui e' stata creata
+(fChain). Ha come campi le varie leaf del tree (Variabili associate a
+ciascun evento).
+Nel .C ci son le isctruzioni su come creare e usare la classe per
+looppare sui vari eventi. Ad esempio se creo un oggetto di questa
+classe e faccio .GetEntry(i) carico nei campi dell'oggeto le variabili
+dell'oggetto i-esimo.
+Nel metodo loop e' predisposto uno scheletro su come fare il ciclo su
+tutti gli eventi.
