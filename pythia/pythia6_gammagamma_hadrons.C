@@ -25,7 +25,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.) 
+void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.) 
 {
 
   // Instance of the Pythia event generator
@@ -186,14 +186,6 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
   // ******************************************************************
   // Open  output file
 
-  char filename[200];
-  sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV.root",(int)TMath::Ceil(sqrts));
-
-  TFile* file = TFile::Open(filename, "RECREATE");
-  if (!file || !file->IsOpen()) {
-    Error("pythia6_gammagamma_hadrons", "Couldn;t open file %s", filename);
-    return;
-  }
 
   book_histos();
 
@@ -292,8 +284,6 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
     //       hdsigmadeta->Write("",TObject::kOverwrite);
     //       //ntFFdsigmadeta->Write("",TObject::kOverwrite);
     //     }
-    delete part;
-    delete particlesArray;
   } // END EVENT GENERATION LOOP
 
   // **********************************************************************************  
@@ -325,12 +315,37 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
   double ptbinsize = 1.; // eta binning: 20 within -10<eta<10
   hdsigmadpT->Scale(ptbinsize*sigmaweight);
 
+
+
+//   //hEdsigmadpT->Rebin(4);
+  char title[300];
+    sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
+    TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
+    cinvdsigmadpT->SetLogy();
+    //cinvdsigmadpT->SetLogx();
+    cinvdsigmadpT->cd();
+    hdsigmadpT->Draw();
+
+    sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
+    TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
+    cinvdsigmadeta->cd();
+    hdsigmadeta->Draw();
+    cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
+  
   //hdsigmadetaTruth->Scale(sigmaweight*0.01); // eta binning: 2000 in -10<eta<10
   //hEdsigmadpT->Scale(ptbinsize/ntrials);
   //ntFFdsigmadeta->SetWeight(sigmaweight);
 
   // **********************************************************************************  
   // Close file
+    char filename[200];
+  sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV.root",(int)TMath::Ceil(sqrts));
+
+  TFile* file = TFile::Open(filename, "RECREATE");
+  if (!file || !file->IsOpen()) {
+    Error("pythia6_gammagamma_hadrons", "Couldn;t open file %s", filename);
+    return;
+  }
 
   file->Write("",TObject::kOverwrite);
   file->Close();
@@ -338,24 +353,12 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
 
   file = TFile::Open(filename);
   file->ls();
+  file->Close();
 
   // Plot distributions for cross-check
 
-//   //hEdsigmadpT->Rebin(4);
-   // char title[300];
-   // sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
-   // TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
-   // cinvdsigmadpT->SetLogy();
-   // //cinvdsigmadpT->SetLogx();
-   // cinvdsigmadpT->cd();
-   // hdsigmadpT->Draw();
 
-   // sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
-   // TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
-   // cinvdsigmadeta->cd();
-   // hdsigmadeta->Draw();
-
-   
+    
 
 }
 
