@@ -344,7 +344,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
   // Open  output file and Close file
     
   char filename[200];
-  sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV_seed%d.root",(int)TMath::Ceil(sqrts),seed);
+  sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV_seed%d_Nevts%d.root",(int)TMath::Ceil(sqrts),seed,Nevts);
 
   TFile* file = TFile::Open(filename, "RECREATE");
   if (!file || !file->IsOpen()) {
