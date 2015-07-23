@@ -69,7 +69,7 @@ Siamo riusciti ad eseguire il programma simulando 100000 eventi.
 
 To do:
 - aggiustare la normalizzazione che ancora non torna
-- implementare un programmino che faccia simulare 1000 eventi a pythia per 10 volte, unisca gli istogrammi e poi faccia il merge degli istogrammi. In questo modo possiamo simulare tanti eventi senza avere problemi di memoria
+- implementare un programmino che faccia simulare 1000 eventi a pythia per 10 volte, unisca gli istogrammi e poi faccia il merge degli istogrammi. In questo modo possiamo simulare tanti eventi senza avere problemi di memoria (Basta usare hadd sui file .root prodotti ogni volta; bisogna stare attenti ad usare seed diversi)
 
 
 23/06 pomeriggio
@@ -85,10 +85,10 @@ Abbiamo quindi studiato com'e' fatta la classe.
 La classe ha direttamente un puntatore al tree da cui e' stata creata
 (fChain). Ha come campi le varie leaf del tree (Variabili associate a
 ciascun evento).
-Nel .C ci son le isctruzioni su come creare e usare la classe per
+Nel .C ci son le istruzioni su come creare e usare la classe per
 looppare sui vari eventi. Ad esempio se creo un oggetto di questa
-classe e faccio .GetEntry(i) carico nei campi dell'oggeto le variabili
-dell'oggetto i-esimo.
+classe e faccio .GetEntry(i) carico nei campi dell'oggetto le variabili
+dell’evento i-esimo.
 Nel metodo loop e' predisposto uno scheletro su come fare il ciclo su
 tutti gli eventi.
 
