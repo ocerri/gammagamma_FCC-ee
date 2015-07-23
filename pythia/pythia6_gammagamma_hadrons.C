@@ -240,10 +240,12 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
     //cout << "<I> PYTHIA particles in event: " << N << " " << flush;
 
     //int Nch = 0;
+    TMCParticle *part;
+    TParticle *partic;
 
     for (int ip = 0; ip < N; ip++ ) {
 
-      TMCParticle *part = (TMCParticle*)particlesArray->At(ip);
+      part = (TMCParticle*)particlesArray->At(ip);
       int status = part->GetKS();
       if (status!=1) continue; // Only consider final-state particles
 
@@ -259,7 +261,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
       //fly for 10 mm
 	
 
-      TParticle *partic = (TParticle*)TMCParticle2TParticle(part);
+      partic = (TParticle*)TMCParticle2TParticle(part);
       double ptPartic = partic->Pt();
       double etaPartic = partic->Eta();
       //phiPartic = partic->Phi();
@@ -267,17 +269,16 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
       if ( ptPartic<0.12 ) continue; //cut on Pt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       
       // Histo filling
-      if (abs(etaPartic)>1.5) continue; //Fill only if |eta|<1.5!!!!!!!!!!!!!!!!!!!!!
 
       hdsigmadeta->Fill(abs(etaPartic));
       
       // if (TMath::Abs(etaPartic)<etaRange) {
+      if (abs(etaPartic)>1.5) continue; //Fill only if |eta|<1.5!!!!!!!!!!!!!!!!!!!!!
       hdsigmadpT->Fill(ptPartic);
       //hEdsigmadpT->Fill(ptPartic,1/(2*TMath::Pi()*ptPartic));
       //}
-
+      delete partic;
       // if (TMath::Abs(etaPartic)<1.) Nch++;
-      
     } // End loop over all particles in event
 
 
@@ -291,7 +292,8 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
     //       hdsigmadeta->Write("",TObject::kOverwrite);
     //       //ntFFdsigmadeta->Write("",TObject::kOverwrite);
     //     }
-    
+    delete part;
+    delete particlesArray;
   } // END EVENT GENERATION LOOP
 
   // **********************************************************************************  
@@ -318,7 +320,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
   // **********************************************************************************  
   // Normalize histos by weighted cross-section, pseudorapidity range, and the pT bin size
        
-  double etabinsize = 1.; // eta binning: 20 within -10<eta<10
+  double etabinsize = 3.3; // eta binning: 20 within -10<eta<10
   hdsigmadeta->Scale(etabinsize*sigmaweight);
   double ptbinsize = 1.; // eta binning: 20 within -10<eta<10
   hdsigmadpT->Scale(ptbinsize*sigmaweight);
@@ -340,18 +342,18 @@ void pythia6_gammagamma_hadrons( int Nevts = 10, double sqrts = 160.)
   // Plot distributions for cross-check
 
 //   //hEdsigmadpT->Rebin(4);
-   char title[300];
-   sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
-   TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
-   cinvdsigmadpT->SetLogy();
-   //cinvdsigmadpT->SetLogx();
-   cinvdsigmadpT->cd();
-   hdsigmadpT->Draw();
+   // char title[300];
+   // sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
+   // TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
+   // cinvdsigmadpT->SetLogy();
+   // //cinvdsigmadpT->SetLogx();
+   // cinvdsigmadpT->cd();
+   // hdsigmadpT->Draw();
 
-   sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
-   TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
-   cinvdsigmadeta->cd();
-   hdsigmadeta->Draw();
+   // sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
+   // TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
+   // cinvdsigmadeta->cd();
+   // hdsigmadeta->Draw();
 
    
 

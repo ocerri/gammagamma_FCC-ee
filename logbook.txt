@@ -37,3 +37,12 @@ ctau 10m i K0 non decadono e quindi non li vedo perche non sono nelle particelle
 
 - CI sarebbe da mettere anche l'energia transeversa mancante sia
   minore di 5 GeV; 
+
+
+
+22/07 - 18
+
+Il programma va ma bisogna rivedere:
+La normalizzazione (abbiamo cambiato il numero di BIN)
+Numero di bin (5 e non 6)
+controllare che non ci sia troppo uso di memoria: mettere delete alla fine di ogni loop
