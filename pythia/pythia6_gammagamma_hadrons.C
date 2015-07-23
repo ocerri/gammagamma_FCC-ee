@@ -258,13 +258,12 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
       //phiPartic = partic->Phi();
 
       if ( ptPartic<0.12 ) continue; //cut on Pt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      
+      if (abs(etaPartic)>1.5) continue; //Fill only if |eta|<1.5!!!!!!!!!!!!!!!!!!!!!   
       // Histo filling
 
       hdsigmadeta->Fill(abs(etaPartic));
       
       // if (TMath::Abs(etaPartic)<etaRange) {
-      if (abs(etaPartic)>1.5) continue; //Fill only if |eta|<1.5!!!!!!!!!!!!!!!!!!!!!
       hdsigmadpT->Fill(ptPartic);
       //hEdsigmadpT->Fill(ptPartic,1/(2*TMath::Pi()*ptPartic));
       //}
@@ -303,16 +302,16 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
 
   cout << "<I> Pythia cross section: " << xsection << " mb || number of trials: " << ntrials << " || sigmaweight = "<< sigmaweight <<endl;
 
-  double dNchdeta = hdsigmadeta->GetBinContent(11)/ntrials; 
-  cout << "<I> dN_ch/deta|_{eta=0} = " << dNchdeta << " in e+e- --> gamma gamma --> X at sqrt(s) = " << sqrts << " GeV " << endl ;
+  // double dNchdeta = hdsigmadeta->GetBinContent(11)/ntrials; 
+  // cout << "<I> dN_ch/deta|_{eta=0} = " << dNchdeta << " in e+e- --> gamma gamma --> X at sqrt(s) = " << sqrts << " GeV " << endl ;
 
   // **********************************************************************************  
   // Normalize histos by weighted cross-section, pseudorapidity range, and the pT bin size
        
-  double etabinsize = 3.3; // eta binning: 20 within -10<eta<10
-  hdsigmadeta->Scale(etabinsize*sigmaweight);
+  double etabinsize = 1.5/5; // eta binning: 20 within -10<eta<10
+  hdsigmadeta->Scale(sigmaweight/etabinsize);
   double ptbinsize = 1.; // eta binning: 20 within -10<eta<10
-  hdsigmadpT->Scale(ptbinsize*sigmaweight);
+  hdsigmadpT->Scale(sigmaweight/ptbinsize);
     
   //hdsigmadetaTruth->Scale(sigmaweight*0.01); // eta binning: 2000 in -10<eta<10
   //hEdsigmadpT->Scale(ptbinsize/ntrials);
@@ -324,21 +323,21 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
 
 
 //   //hEdsigmadpT->Rebin(4);
-  // char title[300];
-  //   sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
-  //   TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
-  //   cinvdsigmadpT->SetLogy();
-  //   //cinvdsigmadpT->SetLogx();
-  //   cinvdsigmadpT->cd();
-  //   hdsigmadpT->Draw();
-  //   cinvdsigmadpT->SaveAs("hdsigmadpT.pdf");    
+  char title[300];
+    sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
+    TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
+    cinvdsigmadpT->SetLogy();
+    //cinvdsigmadpT->SetLogx();
+    cinvdsigmadpT->cd();
+    hdsigmadpT->Draw();
+    cinvdsigmadpT->SaveAs("hdsigmadpT.pdf");    
 
 
-  //   sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
-  //   TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
-  //   cinvdsigmadeta->cd();
-  //   hdsigmadeta->Draw();
-  //   cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
+    sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
+    TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
+    cinvdsigmadeta->cd();
+    hdsigmadeta->Draw();
+    cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
 
 
   // **********************************************************************************  
