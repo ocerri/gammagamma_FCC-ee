@@ -91,3 +91,17 @@ classe e faccio .GetEntry(i) carico nei campi dell'oggeto le variabili
 dell'oggetto i-esimo.
 Nel metodo loop e' predisposto uno scheletro su come fare il ciclo su
 tutti gli eventi.
+
+Incontro con DAVID: TODO:
+ribinnare il dsigma in dpt in modo da avere il numero giusto di bin
+per poterlo confontrare con gli articoli (~20 pt per GeV). Inoltre
+fittare questo con una legge di potenza.
+
+Provare a cambiare il metodo i generazione di PYTHIA da 10 a 30 del
+MSTP(14,) alla ln 172
+
+Provare a plottare(histo) il numero di adroni per evento che entrano
+negli histo, e anche il W per evento mettendoli tutti anche quelli che
+non passano il trigger
+
+Cercare altri articoli collegati a LEP2 che fanno dsigma in deta
