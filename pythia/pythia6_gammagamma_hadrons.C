@@ -25,7 +25,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.) 
+void pythia6_gammagamma_hadrons( int Nevts = 100000, double sqrts = 160.) 
 {
 
   // Instance of the Pythia event generator
@@ -184,7 +184,6 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
 
 
   // ******************************************************************
-  // Open  output file
 
 
   book_histos();
@@ -314,7 +313,14 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
   hdsigmadeta->Scale(etabinsize*sigmaweight);
   double ptbinsize = 1.; // eta binning: 20 within -10<eta<10
   hdsigmadpT->Scale(ptbinsize*sigmaweight);
+    
+  //hdsigmadetaTruth->Scale(sigmaweight*0.01); // eta binning: 2000 in -10<eta<10
+  //hEdsigmadpT->Scale(ptbinsize/ntrials);
+  //ntFFdsigmadeta->SetWeight(sigmaweight);
 
+
+  // **********************************************************************************  
+  // Plot distributions for cross-check
 
 
 //   //hEdsigmadpT->Rebin(4);
@@ -325,20 +331,20 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
     //cinvdsigmadpT->SetLogx();
     cinvdsigmadpT->cd();
     hdsigmadpT->Draw();
+    cinvdsigmadpT->SaveAs("hdsigmadpT.pdf");    
+
 
     sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
     TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
     cinvdsigmadeta->cd();
     hdsigmadeta->Draw();
     cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
-  
-  //hdsigmadetaTruth->Scale(sigmaweight*0.01); // eta binning: 2000 in -10<eta<10
-  //hEdsigmadpT->Scale(ptbinsize/ntrials);
-  //ntFFdsigmadeta->SetWeight(sigmaweight);
+
 
   // **********************************************************************************  
-  // Close file
-    char filename[200];
+  // Open  output file and Close file
+    
+  char filename[200];
   sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV.root",(int)TMath::Ceil(sqrts));
 
   TFile* file = TFile::Open(filename, "RECREATE");
@@ -354,12 +360,6 @@ void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.)
   file = TFile::Open(filename);
   file->ls();
   file->Close();
-
-  // Plot distributions for cross-check
-
-
-    
-
 }
 
 
