@@ -92,7 +92,10 @@ dell'oggetto i-esimo.
 Nel metodo loop e' predisposto uno scheletro su come fare il ciclo su
 tutti gli eventi.
 
-Incontro con DAVID: TODO:
+Incontro con DAVID:
+La normalizzazione va bene in questo modo e circa 50k eventi ci
+bastano per un fit decente.
+TODO:
 ribinnare il dsigma in dpt in modo da avere il numero giusto di bin
 per poterlo confontrare con gli articoli (~20 pt per GeV). Inoltre
 fittare questo con una legge di potenza.
@@ -105,3 +108,5 @@ negli histo, e anche il W per evento mettendoli tutti anche quelli che
 non passano il trigger
 
 Cercare altri articoli collegati a LEP2 che fanno dsigma in deta
+
+Occhio ai tagli su W e PT negli articoli del LEP2
