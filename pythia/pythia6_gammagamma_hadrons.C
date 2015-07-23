@@ -25,7 +25,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 100000, double sqrts = 160.) 
+void pythia6_gammagamma_hadrons( int Nevts = 1000, double sqrts = 160.) 
 {
 
   // Instance of the Pythia event generator
@@ -324,28 +324,28 @@ void pythia6_gammagamma_hadrons( int Nevts = 100000, double sqrts = 160.)
 
 
 //   //hEdsigmadpT->Rebin(4);
-  char title[300];
-    sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
-    TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
-    cinvdsigmadpT->SetLogy();
-    //cinvdsigmadpT->SetLogx();
-    cinvdsigmadpT->cd();
-    hdsigmadpT->Draw();
-    cinvdsigmadpT->SaveAs("hdsigmadpT.pdf");    
+  // char title[300];
+  //   sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
+  //   TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
+  //   cinvdsigmadpT->SetLogy();
+  //   //cinvdsigmadpT->SetLogx();
+  //   cinvdsigmadpT->cd();
+  //   hdsigmadpT->Draw();
+  //   cinvdsigmadpT->SaveAs("hdsigmadpT.pdf");    
 
 
-    sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
-    TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
-    cinvdsigmadeta->cd();
-    hdsigmadeta->Draw();
-    cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
+  //   sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
+  //   TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
+  //   cinvdsigmadeta->cd();
+  //   hdsigmadeta->Draw();
+  //   cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
 
 
   // **********************************************************************************  
   // Open  output file and Close file
     
   char filename[200];
-  sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV.root",(int)TMath::Ceil(sqrts));
+  sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV_seed%d.root",(int)TMath::Ceil(sqrts),seed);
 
   TFile* file = TFile::Open(filename, "RECREATE");
   if (!file || !file->IsOpen()) {
@@ -353,7 +353,10 @@ void pythia6_gammagamma_hadrons( int Nevts = 100000, double sqrts = 160.)
     return;
   }
 
-  file->Write("",TObject::kOverwrite);
+  file->cd();
+  hdsigmadeta->Write();
+  hdsigmadpT->Write();
+  //file->Write("",TObject::kOverwrite);
   file->Close();
   cout << endl << "#######<I> File " << filename << " created. Take a look ... ##############" << endl << endl;
 
