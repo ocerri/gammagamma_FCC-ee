@@ -15,10 +15,21 @@ piatta?
 Che vuol dire tagged or untagged e+/e-?
 e Anti tagging?
 
+
+
+22/07 - 15
+
 TAGLI da fare:
+
 - Mettere nelle distribuzioni solo gli  ADRONI CARICHI(come li
 seleziono?):
 Fatto alle righe 257/258 levando dagli histo i leptoni e il W
+
+- Taglio su energia adronica ricostruita 10 GeV < W < 125 GeV. W comprende l’energia di tutti gli adroni (anche quelli neutri) e l’energia dei fotoni. 
+
+-Taglio su |eta|<1.5
+
+
  
 il K0s ha un ctau di 2.68 cm e decade in pioni...Li dovrei rivelare.
 Quindi metto i K0 negli histo, oppure lo faccio decadere in pioni e ci
@@ -33,11 +44,12 @@ ctau 10m i K0 non decadono e quindi non li vedo perche non sono nelle particelle
 
 - Devo avere almeno 3GeV nel ECAL
 
-- Energia totale in ECAL e HCAL inferiore a 45 GeV
+- Energia totale in ECAL e HCAL inferiore a 45 GeV -> in realtà ECAL e HCAL prendono solo particelle con angoli “grandi” e crediamo che questo taglio sia trascurabile (energia degli eventi gamma gamma è bassa e tanto particelle finiscono nella zona a piccoli angoli)
 
-- CI sarebbe da mettere anche l'energia transeversa mancante sia
-  minore di 5 GeV; 
+- Ci sarebbe da mettere anche l'energia trasversa mancante sia
+minore di 5 GeV; -> in realtà questi sono eventi con neutrini, molto rari, che crediamo siano trascurabili per il nostro processo.
 
+Questi ultimi tagli 4 tagli in ogni caso non vanno implementati perché sono detector based e noi stiamo facendo una simulazione a livello “superiore”, senza simulare i rivelatori.
 
 
 22/07 - 18
@@ -46,3 +58,18 @@ Il programma va ma bisogna rivedere:
 La normalizzazione (abbiamo cambiato il numero di BIN)
 Numero di bin (5 e non 6)
 controllare che non ci sia troppo uso di memoria: mettere delete alla fine di ogni loop
+
+23/07 - 12
+
+Per evitare spreco di memoria è conveniente compilare i programmi anziché interpretarli. Per fare questo conviene lanciare $root nomefile.C++ anziché usare $.L nomefile.C++
+Non abbiamo inserito delete (forse non c’è bisogno)
+Abbiamo fatto in modo che il programma prima disegni i grafici e poi li inserisca sul file, chiudendo il file. Per come era scritto prima, gli istogrammi veniva scritti direttamente sul file e poi mostrati. Ma quando il file veniva chiuso dal programma gli istogrammi venivano cancellati dal canvas.
+Abbiamo aumentato la memoria virtuale dedicata ad un processo usando $ulimit .
+Siamo riusciti ad eseguire il programma simulando 100000 eventi.
+
+To do:
+- aggiustare la normalizzazione che ancora non torna
+- implementare un programmino che faccia simulare 1000 eventi a pythia per 10 volte, unisca gli istogrammi e poi faccia il merge degli istogrammi. In questo modo possiamo simulare tanti eventi senza avere problemi di memoria
+
+
+
