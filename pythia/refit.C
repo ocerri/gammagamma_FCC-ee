@@ -1,6 +1,7 @@
 #include "pythia6_gammagamma_hadrons.h"
 
 void refit(){
+  Float_t sqrts=160.0; //energia nel Cm in GeV
   TFile *file = new TFile("_root/MSTP14-10_final.root");
   TH1F *histo = (TH1F*)file->Get("hdsigmadpT");
   file->Close();
