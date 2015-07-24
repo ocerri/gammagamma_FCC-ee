@@ -32,6 +32,8 @@ TDatabasePDG *PDG = 0;
 
 TH1F* hdsigmadeta = 0;
 TH1F* hdsigmadpT = 0;
+TH1F* hW = 0;
+
 //TH1F* hEdsigmadpT = 0;
 //TNtuple* ntFFdsigmadeta = 0;
 
@@ -171,6 +173,7 @@ bool passEvtSelection( TPythia6* pythia )
 
   Double_t W_gen = TMath::Sqrt(EN_tot*EN_tot - px_tot*px_tot - py_tot*py_tot - pz_tot*pz_tot );
 
+  hW->fill(W_gen); //Fill the W histo
 
   if (W_gen<125 && W_gen>10) return true; //Cut on W !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -210,7 +213,7 @@ void book_histos()
   hdsigmadeta = new TH1F(title,title,5,0,1.5);
   hdsigmadeta->SetXTitle("|#eta|");
   hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (mb)");
-  hdsigmadeta->SetMinimum(0.);
+  hdsigmadeta->SetMinimum(0.0001);
   hdsigmadeta->Sumw2();
 
   //   hdsigmadetaTruth = new TH1F("hdsigmadetaTruth","hdsigmadetaTruth",2000,-10,10);
@@ -225,6 +228,13 @@ void book_histos()
   hdsigmadpT->SetYTitle("d#sigma/dp_{T} (pb/GeV)");
   hdsigmadpT->SetMinimum(0.0001);
   hdsigmadpT->Sumw2();
+
+  sprintf(title, "hW");
+  hW = new TH1F(title,title,10,0,160);
+  hW->SetXTitle("W(GeV)");
+  hW->SetYTitle("Nuymber of events");
+  hW->SetMinimum(0.0001);
+  hW->Sumw2();
 
 //   sprintf(title, "hEdsigmadpT");
 //   hEdsigmadpT = new TH1F(title,title,1000,0.,10.);
