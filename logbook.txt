@@ -120,8 +120,12 @@ Aggiungere il plot del particle ID
 
 TODO:
 #Creare cartella con file .root e reindirizzare la creazione del file
-Far tornare il fit (escludendo le code? e fare MSTP)
+#Far tornare il fit (escludendo le code? e fare MSTP)
 Se riusciamo fare un merge dei .root
 Confrontare con i nuovi articoli (occhio ai tagli)
+
+Per chiamare una funzione e passargli degli argomenti a root fare:
+$root ‘pythia6_gammagamma_hadrons.C++(10,160,10)'
+
 
 
