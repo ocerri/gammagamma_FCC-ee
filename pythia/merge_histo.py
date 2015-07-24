@@ -18,6 +18,11 @@ for file_name in file_list:
         h_had_per_ev_f = file.Get('h_hadrons_per_event')
         h_W_f = file.Get('hW')
         h_id_part_f = file.Get('h_id_particle')
+        h_dsdeta_f.SetDirectory(0)
+        h_dsdpt_f.SetDirectory(0)
+        h_had_per_ev_f.SetDirectory(0)
+        h_W_f.SetDirectory(0)
+        h_id_part_f.SetDirectory(0)
         print(type(h_dsdeta_f))
     else:
         print(type(h_dsdeta_f))
@@ -33,7 +38,7 @@ for file_name in file_list:
 h_dsdeta_f.Scale(1/n_file)
 h_dsdpt_f.Scale(1/n_file)
 
-out_file = rt.TFile('_root/MSTP14-10_final.root')
+out_file = rt.TFile('_root/MSTP14-10_final.root','RECREATE')
 out_file.cd()
 h_dsdeta_f.Write()
 h_dsdpt_f.Write()
