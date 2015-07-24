@@ -35,7 +35,7 @@ void refit(){
   cout << "prob = " << fit_prob << endl;
   cout << endl;
 
-  std::ifstream myfile;
+  std::ofstream myfile;
    myfile.open("_txt/final_fit_results_MSRP14-10.txt");
    myfile << "fitting with C*x^alpha" << endl;
    myfile << "C = " << f_fit->GetParameter(1) << " +/- " << f_fit->GetParError(1) << endl;
