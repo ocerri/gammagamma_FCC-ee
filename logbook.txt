@@ -128,7 +128,7 @@ Per chiamare una funzione e passargli degli argomenti a root fare:
 $root ‘pythia6_gammagamma_hadrons.C++(10,160,10)'
 
 Domande:
-Abbiamo visto che produciamo pochi eventi con un un solo adrone carico rispetto al numero di eventi senza adroni carichi o con due adroni carichi. Perché?
+Abbiamo visto che produciamo pochi eventi con un un solo adrone carico rispetto al numero di eventi senza adroni carichi o con due adroni carichi. Perché? è poco probabile fare un solo adrone.
 Su 11000 eventi che passano i tagli vediamo tanti pioni (30000), abbastanza K (3000) e un po’ di protoni (~1000).
-Come vengono prodotti i jet di adroni?
+Come vengono prodotti i jet di adroni? Prima si formano tanti adroni e gluoni e solo alla fine, quando sono poco energetici, adronizzano.
 
