@@ -98,20 +98,20 @@ bastano per un fit decente.
 
 TODO:
 
-ribinnare il dsigma in dpt in modo da avere il numero giusto di bin
+#ribinnare il dsigma in dpt in modo da avere il numero giusto di bin
 per poterlo confontrare con gli articoli (~20 pt per GeV). 
-Inoltre fittare questo con una legge di potenza.
+#Inoltre fittare questo con una legge di potenza.
 
-Provare a cambiare il metodo i generazione di PYTHIA da 10 a 30 del
+#Provare a cambiare il metodo i generazione di PYTHIA da 10 a 30 del
 MSTP(14,) alla ln 172
 
-Provare a plottare(histo) il numero di adroni per evento che entrano
+#Provare a plottare(histo) il numero di adroni per evento che entrano
 negli histo, e anche il W per evento mettendoli tutti anche quelli che
 non passano il trigger
 
-Cercare altri articoli collegati a LEP2 che fanno dsigma in deta
+#Cercare altri articoli collegati a LEP2 che fanno dsigma in deta
 
-Occhio ai tagli su W e PT negli articoli del LEP2
+#Occhio ai tagli su W e PT negli articoli del LEP2
 
 22/06 
 
@@ -119,7 +119,7 @@ Fatto tutto TODO tranne provare a cambiare MSTP(14,…)
 Aggiungere il plot del particle ID
 
 TODO:
-Creare cartella con file .root e reindirizzare la creazione del file
+#Creare cartella con file .root e reindirizzare la creazione del file
 Far tornare il fit (escludendo le code? e fare MSTP)
 Se riusciamo fare un merge dei .root
 Confrontare con i nuovi articoli (occhio ai tagli)
