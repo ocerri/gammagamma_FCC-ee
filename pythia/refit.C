@@ -4,20 +4,20 @@ void refit(){
   Float_t sqrts=160.0; //energia nel Cm in GeV
   TFile *file = new TFile("_root/MSTP14-10_final.root");
   TH1F *histo = (TH1F*)file->Get("hdsigmadpT");
-  file->Close();
+  //file->Close();
 
   TF1 *f_fit = new TF1("f_fit", pdf, pt_min, pt_max, 3);
   f_fit->SetParNames("m","C","alpha");
 
   cout << "Starting fitting to dsigmadpT..." << endl << "Give starting parameters for pdf(x) =C*x^alpha +m" << endl;
 
-  Double_t m = 5e4;
+  Double_t m = 0;
   //cout << "m :"; cin >> m;
 
   Double_t C = 2500;
   //cout << "C: "; cin >> C;
 
-  Double_t alpha = -4;
+  Double_t alpha = -3;
   //cout << "alpha: "; cin >> alpha;
   
   f_fit->SetParameter(0, m);
@@ -25,7 +25,7 @@ void refit(){
   f_fit->SetParameter(1, C);
   f_fit->SetParameter(2, alpha);
 
-  histo->Fit(f_fit,"","",0.6,5);
+  histo->Fit(f_fit,"","",0.6,7);
   Double_t fit_chi2 = f_fit->GetChisquare();
   Int_t    fit_ndof = f_fit->GetNDF();
   Double_t fit_prob = f_fit->GetProb();
