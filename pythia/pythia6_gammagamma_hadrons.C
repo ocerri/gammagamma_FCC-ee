@@ -314,7 +314,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   // Normalize histos by weighted cross-section, pseudorapidity range, and the pT bin size
        
   double etabinsize = 1.5/5; // eta binning: 20 within -10<eta<10
-  hdsigmadeta->Scale(sigmaweight/etabinsize);
+  hdsigmadeta->Scale(1e-3*sigmaweight/etabinsize);
   double ptbinsize = (pt_max-pt_min)/n_bin_pt;
   hdsigmadpT->Scale(sigmaweight/ptbinsize);
     
@@ -356,19 +356,22 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
 
   TF1 *f_fit = new TF1("f_fit", pdf, pt_min, pt_max, 3);
   f_fit->SetParNames("m","C","alpha");
-  
+
+  cinvdsigmadpT->cd(); //changing canvas
+
   cout << "Starting fitting to dsigmadpT..." << endl << "Give starting parameters for pdf(x) =C*x^alpha +m" << endl;
 
   Double_t m = 5e4;
-  cout << "m :"; cin >> m;
+  //cout << "m :"; cin >> m;
 
   Double_t C = 1e4;
-  cout << "C: "; cin >> C;
+  //cout << "C: "; cin >> C;
 
   Double_t alpha = -8;
-  cout << "alpha: "; cin >> alpha;
+  //cout << "alpha: "; cin >> alpha;
   
   f_fit->SetParameter(0, m);
+  f_fit->FixParameter(0,0);
   f_fit->SetParameter(1, C);
   f_fit->SetParameter(2, alpha);
 
@@ -398,11 +401,8 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   file->cd();
   hdsigmadeta->Write();
   hdsigmadpT->Write();
-<<<<<<< HEAD
   h_had_per_ev->Write();
-=======
   hW->Write();
->>>>>>> origin/master
   //file->Write("",TObject::kOverwrite);
   file->Close();
   cout << endl << "#######<I> File " << filename << " created. Take a look ... ##############" << endl << endl;

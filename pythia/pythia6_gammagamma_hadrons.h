@@ -32,12 +32,9 @@ TDatabasePDG *PDG = 0;
 
 TH1F* hdsigmadeta = 0;
 TH1F* hdsigmadpT = 0;
-<<<<<<< HEAD
 TH1F* h_had_per_ev = 0;
-=======
 TH1F* hW = 0;
 
->>>>>>> origin/master
 //TH1F* hEdsigmadpT = 0;
 //TNtuple* ntFFdsigmadeta = 0;
 
@@ -216,16 +213,12 @@ void book_histos()
   //hdsigmadeta = new TH1F(title,title,21,-10.5,10.5);
   hdsigmadeta = new TH1F(title,title,5,0,1.5);
   hdsigmadeta->SetXTitle("|#eta|");
-  hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (mb)");
-<<<<<<< HEAD
-  hdsigmadeta->SetMinimum(0.00001);
-=======
+  hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (nb)");
   hdsigmadeta->SetMinimum(0.0001);
->>>>>>> origin/master
   hdsigmadeta->Sumw2();
 
   sprintf(title, "h_hadrons_per_event");
-  h_had_per_ev = new TH1F(title,title,7,0,7);
+  h_had_per_ev = new TH1F(title,title,20,0,20);
   h_had_per_ev->SetXTitle("Numebr of charged hadrons per event");
   h_had_per_ev->SetYTitle("Numebr of events");
   h_had_per_ev->SetMinimum(0.000001);
@@ -245,7 +238,7 @@ void book_histos()
   hdsigmadpT->Sumw2();
 
   sprintf(title, "hW");
-  hW = new TH1F(title,title,10,0,160);
+  hW = new TH1F(title,title,32,0,160);
   hW->SetXTitle("W(GeV)");
   hW->SetYTitle("Nuymber of events");
   hW->SetMinimum(0.0001);

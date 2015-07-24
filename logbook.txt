@@ -115,7 +115,5 @@ Occhio ai tagli su W e PT negli articoli del LEP2
 
 22/06 
 
-Trovati altri articoli su gamma gamma -> adroni carichi
+Fatto tutto TODO tranne provare a cambiare MSTP(14,…)
 
-Ribinnato il dsigma in pt e fittato con legge di potenza.
-Aggiunto visto con W per ogni evento
