@@ -173,7 +173,7 @@ bool passEvtSelection( TPythia6* pythia )
 
   Double_t W_gen = TMath::Sqrt(EN_tot*EN_tot - px_tot*px_tot - py_tot*py_tot - pz_tot*pz_tot );
 
-  hW->fill(W_gen); //Fill the W histo
+  hW->Fill(W_gen); //Fill the W histo
 
   if (W_gen<125 && W_gen>10) return true; //Cut on W !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
