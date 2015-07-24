@@ -289,7 +289,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
   
   pythia->Pystat(1);
   
-  double xsection = pythia->GetPARI(1);
+  double xsection = pythia->GetPARI(1) * 1e-9;//conversion form mb to pb
   int    ntrials  = pythia->GetMSTI(5);
   double sigmaweight = xsection/ntrials;
 
@@ -310,7 +310,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
        
   double etabinsize = 1.5/5; // eta binning: 20 within -10<eta<10
   hdsigmadeta->Scale(sigmaweight/etabinsize);
-  double ptbinsize = 1.; // eta binning: 20 within -10<eta<10
+  double ptbinsize = (pt_max-pt_min)/n_bin_pt;
   hdsigmadpT->Scale(sigmaweight/ptbinsize);
     
   //hdsigmadetaTruth->Scale(sigmaweight*0.01); // eta binning: 2000 in -10<eta<10
@@ -327,7 +327,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
     sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
     TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
     cinvdsigmadpT->SetLogy();
-    //cinvdsigmadpT->SetLogx();
+    cinvdsigmadpT->SetLogx();
     cinvdsigmadpT->cd();
     hdsigmadpT->Draw();
     cinvdsigmadpT->SaveAs("hdsigmadpT.pdf");    
@@ -339,6 +339,37 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
     hdsigmadeta->Draw();
     cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
 
+    
+  //*********************FITTING hdsigmadpT using a power law*******************
+
+  TF1 *f_fit = new TF1("f_fit", pdf, pt_min, pt_max, 3);
+  f_fit->SetParNames("m","C","alpha");
+  
+  cout << "Starting fitting to dsigmadpT..." << endl << "Give starting parameters for pdf(x) =C*x^alpha +m" << endl;
+
+  Double_t m = 5e4;
+  cout << "m :"; cin >> m;
+
+  Double_t C = 1e4;
+  cout << "C: "; cin >> C;
+
+  Double_t alpha = -8;
+  cout << "alpha: "; cin >> alpha;
+  
+  f_fit->SetParameter(0, m);
+  f_fit->SetParameter(1, C);
+  f_fit->SetParameter(2, alpha);
+
+  hdsigmadpT->Fit(f_fit,"","",pt_min,pt_max);
+
+  Double_t fit_chi2 = f_fit->GetChisquare();
+  Int_t    fit_ndof = f_fit->GetNDF();
+  Double_t fit_prob = f_fit->GetProb();
+  cout << endl;
+  cout << "chi2 = " << fit_chi2 << endl;
+  cout << "ndof = " << fit_ndof << endl;
+  cout << "prob = " << fit_prob << endl;
+  cout << endl;
 
   // **********************************************************************************  
   // Open  output file and Close file

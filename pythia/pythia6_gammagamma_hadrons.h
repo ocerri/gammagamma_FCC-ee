@@ -35,6 +35,17 @@ TH1F* hdsigmadpT = 0;
 //TH1F* hEdsigmadpT = 0;
 //TNtuple* ntFFdsigmadeta = 0;
 
+//****creating a pdf for dsigmadpT fiting
+
+Double_t pdf(Double_t *x, Double_t*par){
+  Double_t _alpha = par[2];
+  Double_t _C = par[1];
+  Double_t _m = par[0];
+
+  Double_t value = _C*TMath::Power(x[0],_alpha) + _m;
+  return value;
+}
+
 //____________________________________________________________________
 //
 // Transforms a TMCparticle into a TParticle
@@ -186,6 +197,10 @@ bool passEvtSelection( TPythia6* pythia )
 // Book histos
 // 
 
+Double_t pt_max = 10.;
+Double_t pt_min = 0;
+Int_t n_bin_pt = 40;
+
 void book_histos()
 {
 
@@ -205,9 +220,9 @@ void book_histos()
   //   hdsigmadetaTruth->Sumw2();
  
   sprintf(title, "hdsigmadpT");
-  hdsigmadpT = new TH1F(title,title,1000,0.,10.);
+  hdsigmadpT = new TH1F(title,title,n_bin_pt, pt_min , pt_max);
   hdsigmadpT->SetXTitle("p_{T} (GeV/c)");
-  hdsigmadpT->SetYTitle("d#sigma/dp_{T} (mb/GeV)");
+  hdsigmadpT->SetYTitle("d#sigma/dp_{T} (pb/GeV)");
   hdsigmadpT->SetMinimum(0.0001);
   hdsigmadpT->Sumw2();
 
