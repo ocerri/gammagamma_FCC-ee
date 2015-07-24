@@ -4,7 +4,7 @@ Secondo noi abilita interazioni multiple
 pythia MSTJ(22,2) fa decadere tutte le particelle con c\tau < 10 mm oppure
 decadono con una certa probabilità (esponenzialmente)?
 
-Cosa vuol dire “min-bias QCD”?
+Cosa vuol dire “min-bias QCD”? Vuol dire che in una collisione tra protoni (LHC) due quark collidono in modo “hard” mentre gli altri collidono in modo soft producendo particelle leggere.
 
 Perché usiamo la pseudorapidità e non la rapidità?
 Che cosa rappresentano i grafici che dobbiamo riprodurre?
