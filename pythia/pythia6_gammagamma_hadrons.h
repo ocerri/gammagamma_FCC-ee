@@ -32,6 +32,7 @@ TDatabasePDG *PDG = 0;
 
 TH1F* hdsigmadeta = 0;
 TH1F* hdsigmadpT = 0;
+TH1F* h_had_per_ev = 0;
 //TH1F* hEdsigmadpT = 0;
 //TNtuple* ntFFdsigmadeta = 0;
 
@@ -210,8 +211,15 @@ void book_histos()
   hdsigmadeta = new TH1F(title,title,5,0,1.5);
   hdsigmadeta->SetXTitle("|#eta|");
   hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (mb)");
-  hdsigmadeta->SetMinimum(0.);
+  hdsigmadeta->SetMinimum(0.00001);
   hdsigmadeta->Sumw2();
+
+  sprintf(title, "h_hadrons_per_event");
+  h_had_per_ev = new TH1F(title,title,7,0,7);
+  h_had_per_ev->SetXTitle("Numebr of charged hadrons per event");
+  h_had_per_ev->SetYTitle("Numebr of events");
+  h_had_per_ev->SetMinimum(0.000001);
+  h_had_per_ev->Sumw2();
 
   //   hdsigmadetaTruth = new TH1F("hdsigmadetaTruth","hdsigmadetaTruth",2000,-10,10);
   //   hdsigmadetaTruth->SetXTitle("#eta_{MC truth}");

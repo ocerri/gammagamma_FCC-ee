@@ -25,7 +25,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.) 
+void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.) 
 {
 
   // Instance of the Pythia event generator
@@ -234,6 +234,8 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
     TMCParticle *part;
     TParticle *partic;
 
+    Int_t n_hadrons = 0;
+
     for (int ip = 0; ip < N; ip++ ) {
 
       part = (TMCParticle*)particlesArray->At(ip);
@@ -267,11 +269,12 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
       hdsigmadpT->Fill(ptPartic);
       //hEdsigmadpT->Fill(ptPartic,1/(2*TMath::Pi()*ptPartic));
       //}
+      n_hadrons++; //Count the total number of hadrons in this event
       delete partic;
       // if (TMath::Abs(etaPartic)<1.) Nch++;
     } // End loop over all particles in event
 
-
+    h_had_per_ev->Fill(n_hadrons);
 
     
     //hmulteta1->Fill(Nch);
@@ -289,7 +292,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
   
   pythia->Pystat(1);
   
-  double xsection = pythia->GetPARI(1) * 1e-9;//conversion form mb to pb
+  double xsection = pythia->GetPARI(1) * 1e9;//conversion form mb to pb
   int    ntrials  = pythia->GetMSTI(5);
   double sigmaweight = xsection/ntrials;
 
@@ -301,6 +304,8 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
   cout << "<I> Num. of total valid events = " << Nevts-exclEvts << " (Effic="<< triggEff*100. << "%)" << endl;
 
   cout << "<I> Pythia cross section: " << xsection << " mb || number of trials: " << ntrials << " || sigmaweight = "<< sigmaweight <<endl;
+
+  cout << endl << "Hadrons per events: " << endl << "Mean = " << h_had_per_ev->GetMean() << endl << "Max = " << h_had_per_ev->GetMaximumBin() <<endl;
 
   // double dNchdeta = hdsigmadeta->GetBinContent(11)/ntrials; 
   // cout << "<I> dN_ch/deta|_{eta=0} = " << dNchdeta << " in e+e- --> gamma gamma --> X at sqrt(s) = " << sqrts << " GeV " << endl ;
@@ -386,6 +391,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 160.)
   file->cd();
   hdsigmadeta->Write();
   hdsigmadpT->Write();
+  h_had_per_ev->Write();
   //file->Write("",TObject::kOverwrite);
   file->Close();
   cout << endl << "#######<I> File " << filename << " created. Take a look ... ##############" << endl << endl;
