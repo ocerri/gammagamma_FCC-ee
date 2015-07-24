@@ -229,6 +229,8 @@ void book_histos()
   h_id_part = new TH1F(title,title,5000,0,5000);
   h_id_part->SetXTitle("Particle id");
   h_id_part->SetYTitle("Number particle detected");
+  h_id_part->SetMarkerSize(1.4);
+  h_id_part->SetMarkerStyle(33);
   h_id_part->Sumw2();
 
   //   hdsigmadetaTruth = new TH1F("hdsigmadetaTruth","hdsigmadetaTruth",2000,-10,10);

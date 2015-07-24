@@ -116,16 +116,18 @@ non passano il trigger
 22/06 
 
 Fatto tutto TODO tranne provare a cambiare MSTP(14,…)
-Aggiungere il plot del particle ID
+#Aggiungere il plot del particle ID
 
 TODO:
 #Creare cartella con file .root e reindirizzare la creazione del file
-#Far tornare il fit (escludendo le code? e fare MSTP)
+#Far tornare il fit (escludendo le code? e fare MSTP) -> meglio MSTP(14,10)
 Se riusciamo fare un merge dei .root
 Confrontare con i nuovi articoli (occhio ai tagli)
 
 Per chiamare una funzione e passargli degli argomenti a root fare:
 $root ‘pythia6_gammagamma_hadrons.C++(10,160,10)'
 
+Domande:
+Abbiamo visto che produciamo pochi eventi con un un solo adrone carico rispetto al numero di eventi senza adroni carichi o con due adroni carichi. Perché?
 
 

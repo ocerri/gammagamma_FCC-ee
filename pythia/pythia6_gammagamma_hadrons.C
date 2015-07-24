@@ -25,7 +25,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160., int MSTP14_val=10) 
+void pythia6_gammagamma_hadrons( int Nevts = 25000, double sqrts = 160., int MSTP14_val=10) 
 {
 
   // Instance of the Pythia event generator
@@ -361,7 +361,6 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160., int MSTP
     TCanvas *cinvp_id = new TCanvas(title,title,700,600);
     cinvp_id->cd();
     cinvp_id->SetLogy();
-    cinvp_id->SetLogx();
     h_id_part->Draw();
     cinvp_id->SaveAs("_png/histo_particle_id.png");
 
@@ -389,7 +388,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160., int MSTP
   f_fit->SetParameter(1, C);
   f_fit->SetParameter(2, alpha);
 
-  hdsigmadpT->Fit(f_fit,"","",0.4,4); //////!!!!!!!!!!!!!!Warning! Fit is bounded to 4 GeV
+  hdsigmadpT->Fit(f_fit,"","",0.6,5); //////!!!!!!!!!!!!!!Warning! Fit is bounded to 4 GeV
 
   Double_t fit_chi2 = f_fit->GetChisquare();
   Int_t    fit_ndof = f_fit->GetNDF();
