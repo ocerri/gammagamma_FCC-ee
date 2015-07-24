@@ -34,6 +34,7 @@ TH1F* hdsigmadeta = 0;
 TH1F* hdsigmadpT = 0;
 TH1F* h_had_per_ev = 0;
 TH1F* hW = 0;
+TH1F* h_id_part = 0;
 
 //TH1F* hEdsigmadpT = 0;
 //TNtuple* ntFFdsigmadeta = 0;
@@ -202,7 +203,7 @@ bool passEvtSelection( TPythia6* pythia )
 // 
 
 Double_t pt_max = 10.;
-Double_t pt_min = 0;
+Double_t pt_min = 0.1;
 Int_t n_bin_pt = 40;
 
 void book_histos()
@@ -219,10 +220,16 @@ void book_histos()
 
   sprintf(title, "h_hadrons_per_event");
   h_had_per_ev = new TH1F(title,title,20,0,20);
-  h_had_per_ev->SetXTitle("Numebr of charged hadrons per event");
-  h_had_per_ev->SetYTitle("Numebr of events");
+  h_had_per_ev->SetXTitle("Number of charged hadrons per event");
+  h_had_per_ev->SetYTitle("Number of events");
   h_had_per_ev->SetMinimum(0.000001);
   h_had_per_ev->Sumw2();
+
+  sprintf(title, "h_id_particle");
+  h_id_part = new TH1F(title,title,5000,0,5000);
+  h_id_part->SetXTitle("Particle id");
+  h_id_part->SetYTitle("Number particle detected");
+  h_id_part->Sumw2();
 
   //   hdsigmadetaTruth = new TH1F("hdsigmadetaTruth","hdsigmadetaTruth",2000,-10,10);
   //   hdsigmadetaTruth->SetXTitle("#eta_{MC truth}");
@@ -234,7 +241,7 @@ void book_histos()
   hdsigmadpT = new TH1F(title,title,n_bin_pt, pt_min , pt_max);
   hdsigmadpT->SetXTitle("p_{T} (GeV/c)");
   hdsigmadpT->SetYTitle("d#sigma/dp_{T} (pb/GeV)");
-  hdsigmadpT->SetMinimum(0.0001);
+  hdsigmadpT->SetMinimum(0.001);
   hdsigmadpT->Sumw2();
 
   sprintf(title, "hW");

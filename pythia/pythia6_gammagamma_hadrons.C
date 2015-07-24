@@ -25,7 +25,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.) 
+void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160., int MSTP14_val=10) 
 {
 
   // Instance of the Pythia event generator
@@ -170,7 +170,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   */
 
   //pythia->SetMSTP(14,10);  // gamma gamma -> hadrons
-  pythia->SetMSTP(14,30);  // gamma gamma -> hadrons (FULL)
+  pythia->SetMSTP(14,MSTP14_val);  // gamma gamma -> hadrons (FULL)
   pythia->SetMSEL(2); // min-bias QCD
 
 //   cout << "****************** DEFAULT PYTHIA minbias QCD settings: *****************" << endl;
@@ -249,7 +249,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
       //if( abs(pdg)!=211 && abs(pdg)!=321 && abs(pdg)!=2212 && abs(pdg)!=3122 && // charged pions, kaons, protons, lambdas
       //	  abs(pdg)!=11 && abs(pdg)!=13 && abs(pdg)!=15 ) continue; // leptons
 
-      if ( abs(pdg)==11 && abs(pdg)==13 && abs(pdg)==15) continue;// no leptons
+      if ( abs(pdg)==11 || abs(pdg)==13 || abs(pdg)==15) continue;// no leptons
       if (abs(pdg)==24) continue; //no W ....even if they should't
       //fly for 10 mm
 	
@@ -262,7 +262,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
       if ( ptPartic<0.12 ) continue; //cut on Pt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       if (abs(etaPartic)>1.5) continue; //Fill only if |eta|<1.5!!!!!!!!!!!!!!!!!!!!!   
       // Histo filling
-
+      h_id_part->Fill(abs(pdg));
       hdsigmadeta->Fill(abs(etaPartic));
       
       // if (TMath::Abs(etaPartic)<etaRange) {
@@ -335,21 +335,35 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
     cinvdsigmadpT->SetLogx();
     cinvdsigmadpT->cd();
     hdsigmadpT->Draw();
-    cinvdsigmadpT->SaveAs("hdsigmadpT.png");    
+    cinvdsigmadpT->SaveAs("_png/histo_hdsigmadpT.png");    
 
 
     sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
     TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
     cinvdsigmadeta->cd();
     hdsigmadeta->Draw();
-    cinvdsigmadeta->SaveAs("hdsigmadeta.png");
+    cinvdsigmadeta->SaveAs("_png/histo_hdsigmadeta.png");
 
 
     sprintf(title, "cinvW_%iGeV",(int)sqrts);
     TCanvas *cinvW = new TCanvas(title,title,700,600);
     cinvW->cd();
     hW->Draw();
-    cinvW->SaveAs("hW.png");
+    cinvW->SaveAs("_png/histo_hW.png");
+
+    sprintf(title, "cinvn_had_%iGeV",(int)sqrts);
+    TCanvas *cinvn_had = new TCanvas(title,title,700,600);
+    cinvn_had->cd();
+    h_had_per_ev->Draw();
+    cinvn_had->SaveAs("_png/histo_charged_hadrons_per_ev.png");
+
+    sprintf(title, "cinvp_id_%iGeV",(int)sqrts);
+    TCanvas *cinvp_id = new TCanvas(title,title,700,600);
+    cinvp_id->cd();
+    cinvp_id->SetLogy();
+    cinvp_id->SetLogx();
+    h_id_part->Draw();
+    cinvp_id->SaveAs("_png/histo_particle_id.png");
 
     
   //*********************FITTING hdsigmadpT using a power law*******************
@@ -364,10 +378,10 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   Double_t m = 5e4;
   //cout << "m :"; cin >> m;
 
-  Double_t C = 1e4;
+  Double_t C = 2500;
   //cout << "C: "; cin >> C;
 
-  Double_t alpha = -8;
+  Double_t alpha = -4;
   //cout << "alpha: "; cin >> alpha;
   
   f_fit->SetParameter(0, m);
@@ -375,7 +389,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   f_fit->SetParameter(1, C);
   f_fit->SetParameter(2, alpha);
 
-  hdsigmadpT->Fit(f_fit,"","",pt_min,pt_max);
+  hdsigmadpT->Fit(f_fit,"","",0.4,4); //////!!!!!!!!!!!!!!Warning! Fit is bounded to 4 GeV
 
   Double_t fit_chi2 = f_fit->GetChisquare();
   Int_t    fit_ndof = f_fit->GetNDF();
@@ -390,7 +404,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   // Open  output file and Close file
     
   char filename[200];
-  sprintf(filename, "pythia6_gammagamma_hadrons_%iGeV_seed%d_Nevts%d.root",(int)TMath::Ceil(sqrts),seed,Nevts);
+  sprintf(filename, "_root/MSTP14-%d/pythia6_gammagamma_hadrons_%iGeV_seed%d_Nevts%d.root",MSTP14_val,(int)TMath::Ceil(sqrts),seed,Nevts);
 
   TFile* file = TFile::Open(filename, "RECREATE");
   if (!file || !file->IsOpen()) {
@@ -403,6 +417,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   hdsigmadpT->Write();
   h_had_per_ev->Write();
   hW->Write();
+  h_id_part->Write();
   //file->Write("",TObject::kOverwrite);
   file->Close();
   cout << endl << "#######<I> File " << filename << " created. Take a look ... ##############" << endl << endl;
