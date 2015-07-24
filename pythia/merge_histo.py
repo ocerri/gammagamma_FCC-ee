@@ -35,8 +35,12 @@ for file_name in file_list:
     file.Close()
     print(type(h_dsdeta_f))
 
-h_dsdeta_f.Scale(1/n_file)
-h_dsdpt_f.Scale(1/n_file)
+
+print(n_file)
+h_dsdeta_f.Sumw2()
+h_dsdeta_f.Scale(1/float(n_file))
+h_dsdpt_f.Sumw2()
+h_dsdpt_f.Scale(1/float(n_file))
 
 out_file = rt.TFile('_root/MSTP14-10_final.root','RECREATE')
 out_file.cd()
