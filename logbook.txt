@@ -132,3 +132,5 @@ Abbiamo visto che produciamo pochi eventi con un un solo adrone carico rispetto 
 Su 11000 eventi che passano i tagli vediamo tanti pioni (30000), abbastanza K (3000) e un po’ di protoni (~1000).
 Come vengono prodotti i jet di adroni? Prima si formano tanti adroni e gluoni e solo alla fine, quando sono poco energetici, adronizzano.
 
+Abbiamo creato uno script .py che serve a fare il merge degli eventi fatti fino ad ora. Dobbiamo sistemare il fit che viene fatto su dsigmadpt alla fine.
+
