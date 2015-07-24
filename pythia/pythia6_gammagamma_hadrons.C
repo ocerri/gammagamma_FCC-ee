@@ -335,14 +335,21 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
     cinvdsigmadpT->SetLogx();
     cinvdsigmadpT->cd();
     hdsigmadpT->Draw();
-    cinvdsigmadpT->SaveAs("hdsigmadpT.pdf");    
+    cinvdsigmadpT->SaveAs("hdsigmadpT.png");    
 
 
     sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
     TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
     cinvdsigmadeta->cd();
     hdsigmadeta->Draw();
-    cinvdsigmadeta->SaveAs("hdsigmadeta.pdf");    
+    cinvdsigmadeta->SaveAs("hdsigmadeta.png");
+
+
+    sprintf(title, "cinvW_%iGeV",(int)sqrts);
+    TCanvas *cinvW = new TCanvas(title,title,700,600);
+    cinvW->cd();
+    hW->Draw();
+    cinvW->SaveAs("hW.png");
 
     
   //*********************FITTING hdsigmadpT using a power law*******************
@@ -391,7 +398,11 @@ void pythia6_gammagamma_hadrons( int Nevts = 5000, double sqrts = 160.)
   file->cd();
   hdsigmadeta->Write();
   hdsigmadpT->Write();
+<<<<<<< HEAD
   h_had_per_ev->Write();
+=======
+  hW->Write();
+>>>>>>> origin/master
   //file->Write("",TObject::kOverwrite);
   file->Close();
   cout << endl << "#######<I> File " << filename << " created. Take a look ... ##############" << endl << endl;
