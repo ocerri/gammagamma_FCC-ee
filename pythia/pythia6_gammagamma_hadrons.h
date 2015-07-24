@@ -215,7 +215,7 @@ void book_histos()
   hdsigmadeta = new TH1F(title,title,5,0,1.5);
   hdsigmadeta->SetXTitle("|#eta|");
   hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (nb)");
-  hdsigmadeta->GetYaxis->SetRange(7,21);
+  hdsigmadeta->GetYaxis()->SetRange(7,21);
   hdsigmadeta->SetMinimum(0.0001);
   hdsigmadeta->Sumw2();
 
