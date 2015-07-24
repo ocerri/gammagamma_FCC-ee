@@ -118,3 +118,10 @@ Occhio ai tagli su W e PT negli articoli del LEP2
 Fatto tutto TODO tranne provare a cambiare MSTP(14,…)
 Aggiungere il plot del particle ID
 
+TODO:
+Creare cartella con file .root e reindirizzare la creazione del file
+Far tornare il fit (escludendo le code? e fare MSTP)
+Se riusciamo fare un merge dei .root
+Confrontare con i nuovi articoli (occhio ai tagli)
+
+
