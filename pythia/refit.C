@@ -36,28 +36,40 @@ void refit(){
   cout << endl;
 
   std::ofstream myfile;
-   myfile.open("_txt/final_fit_results_MSRP14-10.txt");
-   myfile << "fitting with C*x^alpha" << endl;
-   myfile << "C = " << f_fit->GetParameter(1) << " +/- " << f_fit->GetParError(1) << endl;
-   myfile << "alpha = " << f_fit->GetParameter(2) << " +/- " << f_fit->GetParError(2) << endl;
-   myfile << "chi2 = " << fit_chi2 << endl;
-   myfile << "ndof = " << fit_ndof << endl;
-   myfile << "prob = " << fit_prob << endl;
-   myfile.close();
+  myfile.open("_txt/final_fit_results_MSRP14-10.txt");
+  myfile << "fitting with C*x^alpha" << endl;
+  myfile << "C = " << f_fit->GetParameter(1) << " +/- " << f_fit->GetParError(1) << endl;
+  myfile << "alpha = " << f_fit->GetParameter(2) << " +/- " << f_fit->GetParError(2) << endl;
+  myfile << "chi2 = " << fit_chi2 << endl;
+  myfile << "ndof = " << fit_ndof << endl;
+  myfile << "prob = " << fit_prob << endl;
+  myfile.close();
 
-   char title[300];
-   sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
-    TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
-    cinvdsigmadpT->SetLogy();
-    cinvdsigmadpT->SetLogx();
-    cinvdsigmadpT->cd();
-    histo->Draw();
-    cinvdsigmadpT->SaveAs("_png/histo_hdsigmadpT_final_MSTP14-10.png");
+  char title[300];
+  sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
+  TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
+  cinvdsigmadpT->SetLogy();
+  cinvdsigmadpT->SetLogx();
+  cinvdsigmadpT->cd();
+  histo->Draw();
+  //cinvdsigmadpT->SaveAs("_png/histo_hdsigmadpT_final_MSTP14-10.png");
 
 
-    file = new TFile("_root/MSTP14-10_final.root");
-    file->cd();
-    histo->Write();
-    file->Close();
+  //file = new TFile("_root/MSTP14-10_final.root");
+  // file->cd();
+  // histo->Write();
+  // file->Close();
+
+  
+  TFile* file_out = TFile::Open("_root/MSTP14-10_final_out.root", "RECREATE");
+  if (!file || !file->IsOpen()) {
+    Error("pythia6_gammagamma_hadrons_final_out", "Couldn;t open file %s", "_root/MSTP14-10_final_out.root");
+    return;
+  }
+
+  file_out->cd();
+  histo->Write();
+  file->Close();
+  cout << endl << "#######<I> File " << "_root/MSTP14-10_final_out.root" << " created. Take a look ... ##############" << endl << endl;
     
 }    
