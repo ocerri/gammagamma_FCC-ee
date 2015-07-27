@@ -22,11 +22,14 @@
 #include "TDatime.h"
 #include "TLegend.h"
 #include "TColor.h"
+#include "TPaveText.h"
+
 
 
 //Create histos-----------------------------------------------------
 TH1F* h_dsdeta10 = 0;
 TH1F* h_dsdeta30 = 0;
+TH1F* h_dsdeta_exp = 0;
 
 TH1F* h_dsdpt10 = 0;
 TH1F* h_dsdpt30 = 0;
@@ -51,17 +54,61 @@ void final_plots_merge(){
  h_dsdeta10 = (TH1F*)file10_dsdeta->Get("hdsigmadeta");
  h_dsdeta10->SetMarkerColor(2);
  h_dsdeta10->SetLineColor(2);
+ h_dsdeta10->SetAxisRange(8.,24.,"Y");
  h_dsdeta10->SetTitle("PYTHIA simulation of d#sigma/deta for e^{+}e^{-} #rightarrow h^{#pm} at 160 GeV");
  
  
  TFile* file30_dsdeta = new TFile("_root/MSTP14-30_final.root");
  h_dsdeta30 = (TH1F*)file30_dsdeta->Get("hdsigmadeta");
  h_dsdeta30->SetMarkerColor(4);
- h_dsdeta30->SetLineColor(4);
+ //h_dsdeta30->SetLineColor(4);
+ h_dsdeta30->SetAxisRange(8.,24.,"Y");
  h_dsdeta30->SetTitle("PYTHIA simulation of d#sigma/deta for {e}^{+} {e}^{-} -> {h}^{#pm} at 160 GeV");
 
+ //Plotting experimental data from txt-------------------------------------------
+
+ std::ifstream myfile;
+ myfile.open("_txt/dsdeta_opal.txt");
+
+ const Int_t n_data = 5; //number of data (rows) in .txt
+
+ Double_t x[n_data];
+ Double_t y[n_data];
+ Double_t ex[n_data];
+ Double_t ey[n_data];
+
+ int j=0;
+
+ //Errors on x are null
+ for(j=0; j< n_data; j++){
+   ex[j]=0;
+ }
+
+ j=0;
+
+ //Read data from file .txt
+ while(true) {
+   myfile >> x[j];
+   myfile >> y[j];
+   myfile >> ey[j];
+   if( myfile.eof() ) break;
+   ++j;
+ }
+
+ myfile.close();
+
+ TGraphErrors* gr = new TGraphErrors(n_data,x,y,ex,ey); //Create TGraph
+ 
+ gr->SetName("gr");
+ //gr->SetLineWidth(2);
+ gr->SetMarkerStyle(5);
+ gr->SetMarkerSize(1);
+ gr->SetMarkerColor(1);
+
+ 
 
  //Draw on Canvas---------------------------------------------------
+   
  // TCanvas* c_dsdpt = new TCanvas("c_dsdpt","dsigmadipt",700,700);
  // //gStyle->SetOptStat(0);
  // c_dsdpt->cd();
@@ -72,28 +119,39 @@ void final_plots_merge(){
  // c_dsdpt->SetGridx();
  // c_dsdpt->SetGridy();
 
-
- // TLegend* leg = c_dsdpt->BuildLegend();
- // // TLegend* leg = new TLegend(0.7,0.7,0.48,0.9);
- // // leg->AddEntry("h_dsdpt10" ,"MSTP(14)=10");
- // // leg->AddEntry("h_dsdpt30" ,"MSTP(14)=30");
+ // TLegend* leg = new TLegend(0.1,0.7,0.48,0.9);
+ // leg->SetHeader("Legend");
+ // leg->AddEntry(h_dsdpt10,"Histogram MSTP(14)=10","lep");
+ // leg->AddEntry(h_dsdpt30,"Histogram MSTP(14)=30","lep");
+ // //leg->AddEntry("gr","Graph with error bars","lep");
  // leg->Draw();
 
+
  TCanvas* c_dsdeta = new TCanvas("c_dsdeta","dsigmadeta",700,700);
- //gStyle->SetOptStat(0);
+ gStyle->SetOptStat(0);
  c_dsdeta->cd();
 
  h_dsdeta10->Draw();
  h_dsdeta30->Draw("same");
+ gr->Draw("P");
  c_dsdeta->SetGridx();
  c_dsdeta->SetGridy();
 
+ //Building Legend-----------------------------------------------------
 
- TLegend* leg1 = c_dsdeta->BuildLegend();
- leg1->Draw();
- 
+ TLegend* leg = new TLegend(0.1,0.7,0.48,0.9);
+ //leg->SetHeader("Legend");
+ leg->AddEntry(h_dsdeta10,"Histogram MSTP(14)=10","lep");
+ leg->AddEntry(h_dsdeta30,"Histogram MSTP(14)=30","lep");
+ leg->AddEntry("gr","Experimental data from OPAL","lep");
+ leg->Draw();
 
+ // TPaveText *pt = new TPaveText(.05,.1,.95,.8);
+ // pt->AddText("A TPaveText can contain severals line of text.");
+ // pt->AddText("They are added to the pave using the AddText method.");
+ // pt->AddLine(.0,.5,1.,.5);
+ // pt->AddText("Even complex TLatex formulas can be added:");
+ // pt->AddText("F(t) = #sum_{i=-#infty}^{#infty}A(i)cos#[]{#frac{i}{t+i}}");
+ // pt->Draw();
 
-
- 
 }
