@@ -51,14 +51,14 @@ void final_plots_merge(){
  h_dsdeta10 = (TH1F*)file10_dsdeta->Get("hdsigmadeta");
  h_dsdeta10->SetMarkerColor(2);
  h_dsdeta10->SetLineColor(2);
- h_dsdeta10->SetTitle("PYTHIA simulation of d#sigma/dp_{t} for e^{+}e^{-} #rightarrow h^{#pm} at 160 GeV");
+ h_dsdeta10->SetTitle("PYTHIA simulation of d#sigma/deta for e^{+}e^{-} #rightarrow h^{#pm} at 160 GeV");
  
  
  TFile* file30_dsdeta = new TFile("_root/MSTP14-30_final.root");
  h_dsdeta30 = (TH1F*)file30_dsdeta->Get("hdsigmadeta");
+ h_dsdeta30->SetMarkerColor(4);
  h_dsdeta30->SetLineColor(4);
- //h_dsdpt30->SetLineStyle(4);
- h_dsdpt30->SetTitle("PYTHIA simulation of d#sigma/dp_{t} for {e}^{+} {e}^{-} -> {h}^{#pm} at 160 GeV");
+ h_dsdeta30->SetTitle("PYTHIA simulation of d#sigma/deta for {e}^{+} {e}^{-} -> {h}^{#pm} at 160 GeV");
 
 
  //Draw on Canvas---------------------------------------------------
@@ -85,8 +85,8 @@ void final_plots_merge(){
 
  h_dsdeta10->Draw();
  h_dsdeta30->Draw("same");
- c_dsdpt->SetGridx();
- c_dsdpt->SetGridy();
+ c_dsdeta->SetGridx();
+ c_dsdeta->SetGridy();
 
 
  TLegend* leg1 = c_dsdeta->BuildLegend();
