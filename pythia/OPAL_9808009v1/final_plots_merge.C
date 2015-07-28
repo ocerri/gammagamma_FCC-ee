@@ -107,7 +107,7 @@ void final_plots_merge(){
  //Draw on Canvas---------------------------------------------------
    
  TCanvas* c_dsdpt = new TCanvas("c_dsdpt","dsigmadipt",700,700);
- //gStyle->SetOptStat(0);
+ gStyle->SetOptStat(0);
  c_dsdpt->cd();
 
  h_dsdpt10->Draw();
@@ -127,7 +127,7 @@ void final_plots_merge(){
  // c_dsdeta->SetGridx();
  // c_dsdeta->SetGridy();
 
- //Building Legend-----------------------------------------------------
+ //Building Legend and adding comments-----------------------------------------------------
 
  TLegend* leg = new TLegend(0.1,0.7,0.48,0.9);
  //leg->SetHeader("Legend");
@@ -136,46 +136,7 @@ void final_plots_merge(){
  leg->AddEntry("gr","Experimental data from OPAL","lep");
  leg->Draw();
 
- //Adding comments in the statistics Box
-
-
- // TPaveText *pt = new TPaveText(.05,.1,.95,.8);
- // pt->AddText("A TPaveText can contain severals line of text.");
- // pt->AddText("They are added to the pave using the AddText method.");
- // pt->AddLine(.0,.5,1.,.5);
- // pt->AddText("Even complex TLatex formulas can be added:");
- // pt->AddText("F(t) = #sum_{i=-#infty}^{#infty}A(i)cos#[]{#frac{i}{t+i}}");
- // pt->Draw();
-
- TPaveStats *ps = (TPaveStats*)c_dsdpt->GetPrimitive("stats");
- ps->SetName("mystats");
- TList *list = ps->GetListOfLines();
-
- // Remove the statistics lines
- TText *tconst = ps->GetLineWith("RMS");
- list->Remove(tconst);
- tconst = ps->GetLineWith("hdsigmadpT");
- list->Remove(tconst);
- tconst = ps->GetLineWith("Entries");
- list->Remove(tconst); 
- tconst = ps->GetLineWith("Mean");
- list->Remove(tconst); 
-
- // Add a new line in the stat box.
- TLatex *myt = new TLatex(0,0,"#cbar#eta#cbar< 1.5");
- myt ->SetTextFont(42);
- myt ->SetTextSize(0.01);
- list->Add(myt);
- myt = new TLatex(0,0,"10<W<125 GeV");
- myt ->SetTextFont(42);
- myt ->SetTextSize(0.01);
- list->Add(myt);
-
- // the following line is needed to avoid that the automatic redrawing of stats
- h_dsdpt10->SetStats(0);
- h_dsdpt30->SetStats(0);
-
- c_dsdpt->Modified();
-
-
+ TLegend* leg2 =new TLegend(0.1,0.7,0.5,0.9,"#splitline{#cbar#eta#cbar< 1.5}{10<W<125 GeV}");
+ leg2->Draw();
+ 
 }

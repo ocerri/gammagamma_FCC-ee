@@ -1,8 +1,8 @@
 #include "pythia6_gammagamma_hadrons.h"
 
-void refit(){
-  Float_t sqrts=160.0; //energia nel Cm in GeV
-  TFile *file = new TFile("_root/MSTP14-30_final.root");
+void refit10(){
+  Float_t sqrts=160; //energia nel Cm in GeV
+  TFile *file = new TFile("_root/MSTP14-10_final.root");
   TH1F *histo = (TH1F*)file->Get("hdsigmadpT");
   //file->Close();
 
@@ -25,7 +25,7 @@ void refit(){
   f_fit->SetParameter(1, C);
   f_fit->SetParameter(2, alpha);
 
-  histo->Fit(f_fit,"","",0.6,7);
+  histo->Fit(f_fit,"","",0.6,10);
   Double_t fit_chi2 = f_fit->GetChisquare();
   Int_t    fit_ndof = f_fit->GetNDF();
   Double_t fit_prob = f_fit->GetProb();
@@ -36,7 +36,7 @@ void refit(){
   cout << endl;
 
   std::ofstream myfile;
-  myfile.open("_txt/final_fit_results_MSRP14-30.txt");
+  myfile.open("_txt/final_fit_results_MSRP14-10.txt");
   myfile << "fitting with C*x^alpha" << endl;
   myfile << "C = " << f_fit->GetParameter(1) << " +/- " << f_fit->GetParError(1) << endl;
   myfile << "alpha = " << f_fit->GetParameter(2) << " +/- " << f_fit->GetParError(2) << endl;
@@ -54,14 +54,8 @@ void refit(){
   histo->Draw();
   //cinvdsigmadpT->SaveAs("_png/histo_hdsigmadpT_final_MSTP14-10.png");
 
-
-  //file = new TFile("_root/MSTP14-10_final.root");
-  // file->cd();
-  // histo->Write();
-  // file->Close();
-
   
-  TFile* file_out = TFile::Open("_root/MSTP14-30_final_out.root", "RECREATE");
+  TFile* file_out = TFile::Open("_root/MSTP14-10_final_out.root", "RECREATE");
   if (!file || !file->IsOpen()) {
     Error("pythia6_gammagamma_hadrons_final_out", "Couldn;t open file %s", "_root/MSTP14-10_final_out.root");
     return;
