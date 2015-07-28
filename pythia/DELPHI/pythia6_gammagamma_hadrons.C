@@ -260,7 +260,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 195.5, int MS
       //phiPartic = partic->Phi();
 
       if ( ptPartic<0.15 ) continue; //cut on Pt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      if (abs(etaPartic)>2.4) continue; //Fill only if |eta|<2.4!!!!!!!!!!!!!!!!!!!!!   
+      if (abs(etaPartic)>1.5) continue; //Fill only if |eta|<1.5!!!!!!!!!!!!!!!!!!!!!   
       // Histo filling
       h_id_part->Fill(abs(pdg));
       hdsigmadeta->Fill(abs(etaPartic));
@@ -313,7 +313,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 195.5, int MS
   // **********************************************************************************  
   // Normalize histos by weighted cross-section, pseudorapidity range, and the pT bin size
        
-  double etabinsize = 2.4/5; // eta binning: 20 within -10<eta<10
+  double etabinsize = 1.5/5; // eta binning: 20 within -10<eta<10
   hdsigmadeta->Scale(1e-3*sigmaweight/etabinsize);
   double ptbinsize = (pt_max-pt_min)/n_bin_pt;
   hdsigmadpT->Scale(sigmaweight/ptbinsize);
@@ -328,41 +328,41 @@ void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 195.5, int MS
 
 
 //   //hEdsigmadpT->Rebin(4);
-  char title[300];
-    sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
-    TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
-    cinvdsigmadpT->SetLogy();
-    cinvdsigmadpT->SetLogx();
-    cinvdsigmadpT->cd();
-    hdsigmadpT->Draw();
-    cinvdsigmadpT->SaveAs("_png/histo_hdsigmadpT.png");    
+  // char title[300];
+  //   sprintf(title, "cinvdsigmadpT_%iGeV",(int)sqrts);
+  //   TCanvas *cinvdsigmadpT = new TCanvas(title,title,700,600);
+  //   cinvdsigmadpT->SetLogy();
+  //   cinvdsigmadpT->SetLogx();
+  //   cinvdsigmadpT->cd();
+  //   hdsigmadpT->Draw();
+  //   cinvdsigmadpT->SaveAs("_png/histo_hdsigmadpT.png");    
 
 
-    sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
-    TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
-    cinvdsigmadeta->cd();
-    hdsigmadeta->Draw();
-    cinvdsigmadeta->SaveAs("_png/histo_hdsigmadeta.png");
+  //   sprintf(title, "cinvdsigmadeta_%iGeV",(int)sqrts);
+  //   TCanvas *cinvdsigmadeta = new TCanvas(title,title,700,600);
+  //   cinvdsigmadeta->cd();
+  //   hdsigmadeta->Draw();
+  //   cinvdsigmadeta->SaveAs("_png/histo_hdsigmadeta.png");
 
 
-    sprintf(title, "cinvW_%iGeV",(int)sqrts);
-    TCanvas *cinvW = new TCanvas(title,title,700,600);
-    cinvW->cd();
-    hW->Draw();
-    cinvW->SaveAs("_png/histo_hW.png");
+  //   sprintf(title, "cinvW_%iGeV",(int)sqrts);
+  //   TCanvas *cinvW = new TCanvas(title,title,700,600);
+  //   cinvW->cd();
+  //   hW->Draw();
+  //   cinvW->SaveAs("_png/histo_hW.png");
 
-    sprintf(title, "cinvn_had_%iGeV",(int)sqrts);
-    TCanvas *cinvn_had = new TCanvas(title,title,700,600);
-    cinvn_had->cd();
-    h_had_per_ev->Draw();
-    cinvn_had->SaveAs("_png/histo_charged_hadrons_per_ev.png");
+  //   sprintf(title, "cinvn_had_%iGeV",(int)sqrts);
+  //   TCanvas *cinvn_had = new TCanvas(title,title,700,600);
+  //   cinvn_had->cd();
+  //   h_had_per_ev->Draw();
+  //   cinvn_had->SaveAs("_png/histo_charged_hadrons_per_ev.png");
 
-    sprintf(title, "cinvp_id_%iGeV",(int)sqrts);
-    TCanvas *cinvp_id = new TCanvas(title,title,700,600);
-    cinvp_id->cd();
-    cinvp_id->SetLogy();
-    h_id_part->Draw();
-    cinvp_id->SaveAs("_png/histo_particle_id.png");
+  //   sprintf(title, "cinvp_id_%iGeV",(int)sqrts);
+  //   TCanvas *cinvp_id = new TCanvas(title,title,700,600);
+  //   cinvp_id->cd();
+  //   cinvp_id->SetLogy();
+  //   h_id_part->Draw();
+  //   cinvp_id->SaveAs("_png/histo_particle_id.png");
 
     
   //*********************FITTING hdsigmadpT using a power law*******************

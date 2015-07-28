@@ -42,7 +42,7 @@ void final_plots_merge(){
  h_dsdpt10 = (TH1F*)file10_dsdpt->Get("hdsigmadpT");
  h_dsdpt10->SetMarkerColor(2);
  h_dsdpt10->SetLineColor(2);
- h_dsdpt10->SetAxisRange(0.01,60000,"Y");
+ h_dsdpt10->SetAxisRange(0.01,100000,"Y");
  h_dsdpt10->SetTitle("PYTHIA simulation of d#sigma/dp_{t} for e^{+}e^{-} #rightarrow h^{#pm} at 195.5 GeV");
  
  
@@ -50,7 +50,7 @@ void final_plots_merge(){
  h_dsdpt30 = (TH1F*)file30_dsdpt->Get("hdsigmadpT");
  h_dsdpt30->SetLineColor(4);
  h_dsdpt30->SetMarkerColor(4);
- h_dsdpt10->SetAxisRange(0.01,60000,"Y");
+ h_dsdpt10->SetAxisRange(0.01,100000,"Y");
  h_dsdpt30->SetTitle("PYTHIA simulation of d#sigma/dp_{t} for {e}^{+} {e}^{-} -> {h}^{#pm} at 195.5 GeV");
 
  // TFile* file10_dsdeta = new TFile("_root/MSTP14-10_final.root");
@@ -112,7 +112,7 @@ void final_plots_merge(){
 
  h_dsdpt10->Draw();
  h_dsdpt30->Draw("same");
- gr->Draw("P");
+ //gr->Draw("P");
  c_dsdpt->SetLogy();
  c_dsdpt->SetGridx();
  c_dsdpt->SetGridy();

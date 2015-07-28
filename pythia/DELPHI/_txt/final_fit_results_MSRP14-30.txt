@@ -1,0 +1,6 @@
+fitting with C*x^alpha
+C = 6890.37 +/- 12.1007
+alpha = -4.07015 +/- 0.00442404
+chi2 = 5097.26
+ndof = 14
+prob = 0
