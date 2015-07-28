@@ -25,7 +25,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 195.5, int MSTP14_val=30) 
+void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 195.5, int MSTP14_val=10) 
 {
 
   // Instance of the Pythia event generator
