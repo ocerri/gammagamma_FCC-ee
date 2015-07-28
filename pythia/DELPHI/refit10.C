@@ -24,8 +24,9 @@ void refit10(){
   f_fit->FixParameter(0,0);
   f_fit->SetParameter(1, C);
   f_fit->SetParameter(2, alpha);
+  f_fit->SetLineStyle(5);
 
-  histo->Fit(f_fit,"","",0.6,7);
+  histo->Fit(f_fit,"","",0.6,14);
   Double_t fit_chi2 = f_fit->GetChisquare();
   Int_t    fit_ndof = f_fit->GetNDF();
   Double_t fit_prob = f_fit->GetProb();
