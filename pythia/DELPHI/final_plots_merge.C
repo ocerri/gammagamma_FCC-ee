@@ -24,6 +24,7 @@
 #include "TColor.h"
 #include "TPaveText.h"
 #include "TPaveStats.h"
+#include "TGraphAsymmErrors.h"
 
 
 
@@ -97,10 +98,6 @@ void final_plots_merge(){
  // TGraphErrors* gr = new TGraphErrors(n_data,x,y,ex,ey); //Create TGraph
  
  // gr->SetName("gr");
- // //gr->SetLineWidth(2);
- // gr->SetMarkerStyle(5);
- // gr->SetMarkerSize(1);
- // gr->SetMarkerColor(1);
 
  //Exp data from internet-----------------------------------------------------------
   double p7661_d1x1y2_xval[] = { 1.76, 2.17, 2.58, 2.98, 3.38, 3.78, 4.18, 4.59, 4.99, 
@@ -129,9 +126,12 @@ void final_plots_merge(){
     0.007 };
   int p7661_d1x1y2_numpoints = 20;
   TGraphAsymmErrors *p7661_d1x1y2 = new TGraphAsymmErrors(p7661_d1x1y2_numpoints, p7661_d1x1y2_xval, p7661_d1x1y2_yval, p7661_d1x1y2_xerrminus, p7661_d1x1y2_xerrplus, p7661_d1x1y2_yerrminus, p7661_d1x1y2_yerrplus);
-  p7661_d1x1y2.SetName("/HepData/7661/d1x1y2");
-  p7661_d1x1y2.SetTitle("/HepData/7661/d1x1y2");
-  p7661_d1x1y2.Draw("AP");
+  p7661_d1x1y2->SetName("Delphi data");
+  p7661_d1x1y2->SetTitle("Delphi data");
+  p7661_d1x1y2->SetLineWidth(2);
+  p7661_d1x1y2->SetMarkerStyle(5);
+  p7661_d1x1y2->SetMarkerSize(1);
+  p7661_d1x1y2->SetMarkerColor(1);
 
  
 
@@ -143,7 +143,7 @@ void final_plots_merge(){
 
  h_dsdpt10->Draw();
  h_dsdpt30->Draw("same");
- //gr->Draw("P");
+ p7661_d1x1y2->Draw("AP");
  c_dsdpt->SetLogy();
  c_dsdpt->SetGridx();
  c_dsdpt->SetGridy();
@@ -164,7 +164,7 @@ void final_plots_merge(){
  //leg->SetHeader("Legend");
  leg->AddEntry(h_dsdpt10,"Histogram MSTP(14)=10","lep");
  leg->AddEntry(h_dsdpt30,"Histogram MSTP(14)=30","lep");
- //leg->AddEntry("gr","Experimental data from OPAL","lep");
+ leg->AddEntry("p7661_d1x1y2","Experimental data from DELPHI","lep");
  leg->Draw();
 
  //Adding comments in the statistics Box-------------------------------------------
@@ -193,7 +193,7 @@ void final_plots_merge(){
  list->Remove(tconst); 
 
  // Add a new line in the stat box.
- TLatex *myt = new TLatex(0,0,"#cbar#eta#cbar< 2.4");
+ TLatex *myt = new TLatex(0,0,"#cbar#eta#cbar< 1.5");
  myt ->SetTextFont(42);
  myt ->SetTextSize(0.01);
  list->Add(myt);
