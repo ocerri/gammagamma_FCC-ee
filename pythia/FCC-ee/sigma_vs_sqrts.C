@@ -37,6 +37,13 @@ Double_t sigma_tot[]={102.2, 183.0, 266.2, 363.9};//nb
 Double_t sigma_c[]={51.4,90.9,131.6,181.4}; //nb
 
 g_sigma_c = new TGraphErrors(4,energy,sigma_c,de,dsigma_c);
+g_sigma_c->GetXaxis()->SetTitle("#sqrt{s} [GeV]");
+g_sigma_c->GetYaxis()->SetTitle("#sigma");
+
 g_sigma_tot = new TGraphErrors(4,energy,sigma_tot,de,dsigma_tot);
+g_sigma_tot->GetXaxis()->SetTitle("#sqrt{s} [GeV]");
+g_sigma_tot->GetYaxis()->SetTitle("#sigma");
+
+TCanvas *c_sigma
 
 }

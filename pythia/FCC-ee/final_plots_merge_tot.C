@@ -38,17 +38,17 @@ TH1F* h_dsdeta350 = 0;
 ///Start merging procedure------------------------------------------
 void final_plots_merge(){
 
- TFile* file90_dsdeta = new TFile("90GeV/_root/pythia6_gammagamma_hadrons_90GeV_seed479395016_Nevts25000.root");
+ TFile* file90_dsdeta = new TFile("90GeV/_root/pythia6_gammagamma_hadrons_90GeV_seed479395139_Nevts25000_tot.root");
  h_dsdeta90 = (TH1F*)file90_dsdeta->Get("hdsigmadeta");
  h_dsdeta90->SetMarkerStyle(24);
  h_dsdeta90->SetMarkerColor(1);
  h_dsdeta90->SetLineColor(1);
- h_dsdeta90->SetAxisRange(0.001,30,"Y");
+ h_dsdeta90->SetAxisRange(0.001,40,"Y");
  h_dsdeta90->SetXTitle("#eta");
- h_dsdeta90->SetYTitle("d#sigma_{ch}/d#eta [nb]");
- h_dsdeta90->SetTitle("PYTHIA simulation of d#sigma_{ch}/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
+ h_dsdeta90->SetYTitle("d#sigma/d#eta [nb]");
+ h_dsdeta90->SetTitle("PYTHIA simulation of d#sigma/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
 
- TFile* file160_dsdeta = new TFile("160GeV/_root/pythia6_gammagamma_hadrons_160GeV_seed479395646_Nevts25000.root");
+ TFile* file160_dsdeta = new TFile("160GeV/_root/pythia6_gammagamma_hadrons_160GeV_seed479395441_Nevts25000_tot.root");
  h_dsdeta160 = (TH1F*)file160_dsdeta->Get("hdsigmadeta");
  h_dsdeta160->SetMarkerStyle(25);
  h_dsdeta160->SetMarkerColor(2);
@@ -56,7 +56,7 @@ void final_plots_merge(){
  h_dsdeta160->SetAxisRange(0.001,45,"Y");
  h_dsdeta160->SetTitle("PYTHIA simulation of d#sigma/#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
 
- TFile* file240_dsdeta = new TFile("240GeV/_root/pythia6_gammagamma_hadrons_240GeV_seed479395489_Nevts25000.root");
+ TFile* file240_dsdeta = new TFile("240GeV/_root/pythia6_gammagamma_hadrons_240GeV_seed479395160_Nevts25000_tot.root");
  h_dsdeta240 = (TH1F*)file240_dsdeta->Get("hdsigmadeta");
  h_dsdeta240->SetMarkerStyle(26);
  h_dsdeta240->SetMarkerColor(3);
@@ -64,7 +64,7 @@ void final_plots_merge(){
  h_dsdeta240->SetAxisRange(0.001,45,"Y");
  h_dsdeta240->SetTitle("PYTHIA simulation of d#sigma/#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
 
- TFile* file350_dsdeta = new TFile("350GeV/_root/pythia6_gammagamma_hadrons_350GeV_seed479395808_Nevts25000.root");
+ TFile* file350_dsdeta = new TFile("350GeV/_root/pythia6_gammagamma_hadrons_350GeV_seed479395855_Nevts25000_tot.root");
  h_dsdeta350 = (TH1F*)file350_dsdeta->Get("hdsigmadeta");
  h_dsdeta350->SetMarkerStyle(27);
  h_dsdeta350->SetMarkerColor(4);
