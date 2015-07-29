@@ -83,7 +83,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 20000, double sqrts = 160, int MSTP
 
   std::ofstream myfile;
   myfile.open("_txt/generation_time.txt");
-  int execution_time[Nevts/500];
+  int execution_time[Nevts/1000];
 
   Int_t n_chadrons_total=0; //counter for the total number of charged hadrons (sum on the events)
 
@@ -200,11 +200,11 @@ void pythia6_gammagamma_hadrons( int Nevts = 20000, double sqrts = 160, int MSTP
   ofstream file_out;
   file_out.open("_txt/output_xsection.txt");
 
-  file_out << Nevts-exclEvts << " \/\/ Total event generated" << endl;
-  file_out << xsection << " \/\/ [pb] Pythia6 total cross section" << endl;
-  file_out << total_chadrons_xsection << " \/\/ [pb] Cross section for e+e- --> gamma gamma --> X"<< endl;
-  file_out << sqrts << " \/\/ [GeV] sqrt(s)" << endl;
-  file_out << N_rate << " \/\/ [Hz] Production Rate (Sigma*Lum)" << endl;
+  file_out << Nevts-exclEvts << " // Total event generated" << endl;
+  file_out << xsection << " // [pb] Pythia6 total cross section" << endl;
+  file_out << total_chadrons_xsection << " // [pb] Cross section for e+e- --> gamma gamma --> X"<< endl;
+  file_out << sqrts << " // [GeV] sqrt(s)" << endl;
+  file_out << N_rate << " // [Hz] Production Rate (Sigma*Lum)" << endl;
   
   file_out.close();
 
