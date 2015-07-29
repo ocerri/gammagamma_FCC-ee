@@ -1,0 +1,4 @@
+1000 // Total event generated
+8602.71 // [pb] Pythia6 total cross section
+53474.4 // [pb] Cross section for e+e- --> gamma gamma --> X90// [GeV] sqrt(s)
+470575// [Hz] Production Rate (Sigma*Lum)
