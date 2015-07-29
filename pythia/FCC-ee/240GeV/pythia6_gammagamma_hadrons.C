@@ -6,6 +6,17 @@
 void pythia6_gammagamma_hadrons( int Nevts = 20000, double sqrts = 240, int MSTP14_val=10) 
 {
 
+  //Luminosity definistion accordig to FCC-ee project specifications
+  Double_t Luminosity=1;
+  if (sqrts==90)
+    Luminosity = 8.8; //pb^-1 s^-1
+  if (sqrts==160)
+    Luminosity = 1.5; //pb^-1 s^-1
+  if (sqrts==240)
+    Luminosity = 0.35; //pb^-1 s^-1
+  if (sqrts==350)
+    Luminosity = 0.084; //pb^-1 s^-1
+
   // Instance of the Pythia event generator
 
   TPythia6* pythia = new TPythia6();
@@ -183,6 +194,19 @@ void pythia6_gammagamma_hadrons( int Nevts = 20000, double sqrts = 240, int MSTP
 
   cout << endl << endl << endl <<  "Total number of charged hadrons = " << n_chadrons_total << endl;
   cout << "Cross section = " << total_chadrons_xsection << "pb  in e+e- --> gamma gamma --> X at sqrt(s) = " << sqrts << " GeV " << endl << endl << endl;
+
+  Double_t N_rate = total_chadrons_xsection*Luminosity;
+
+  ofstream file_out;
+  file_out.open("_txt/output_xsection.txt");
+
+  file_out << Nevts-exclEvts << " \/\/ Total event generated" << endl;
+  file_out << xsection << " \/\/ [pb] Pythia6 total cross section" << endl;
+  file_out << total_chadrons_xsection << " \/\/ [pb] Cross section for e+e- --> gamma gamma --> X"<< endl;
+  file_out << sqrts << " \/\/ [GeV] sqrt(s)" << endl;
+  file_out << N_rate << " \/\/ [Hz] Production Rate (Sigma*Lum)" << endl;
+  
+  file_out.close();
 
 
   // double dNchdeta = hdsigmadeta->GetBinContent(11)/ntrials; 
