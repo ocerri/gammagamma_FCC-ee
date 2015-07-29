@@ -219,6 +219,8 @@ void pythia6_gammagamma_hadrons( int Nevts = 25000, double sqrts = 350, int MSTP
   file_out << sqrts << " // [GeV] sqrt(s)" << endl;
   file_out << N_rate << " // [Hz] Production Rate (Sigma*Lum)" << endl;
   file_out << Pileup << " // Interactions e/gamma e/gamma -> h^+ per bunch" << endl;
+  file_out << n_chadrons_total << " //Total number of hadrons"<< endl;
+  file_out << TMath::Sqrt((float)n_chadrons_total)/n_chadrons_total << " //error" << endl;
   
   file_out.close();
 

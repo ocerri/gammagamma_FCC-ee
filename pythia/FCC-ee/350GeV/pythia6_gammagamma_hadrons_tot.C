@@ -204,7 +204,7 @@ void pythia6_gammagamma_hadrons_tot( int Nevts = 25000, double sqrts = 350, int 
 
   cout << endl << "Hadrons per events: " << endl << "Mean = " << h_had_per_ev->GetMean() << endl << "Max = " << h_had_per_ev->GetMaximumBin() <<endl;
 
-  cout << endl << endl << endl <<  "Total number of charged hadrons = " << n_chadrons_total << endl;
+  cout << endl << endl << endl <<  "Total number of hadrons = " << n_chadrons_total << endl;
   cout << "Cross section = " << total_chadrons_xsection << "pb  in e+e- --> gamma gamma --> X at sqrt(s) = " << sqrts << " GeV " << endl << endl << endl;
 
   Double_t N_rate = total_chadrons_xsection*Luminosity;
@@ -219,7 +219,7 @@ void pythia6_gammagamma_hadrons_tot( int Nevts = 25000, double sqrts = 350, int 
   file_out << sqrts << " // [GeV] sqrt(s)" << endl;
   file_out << N_rate << " // [Hz] Production Rate (Sigma*Lum)" << endl;
   file_out << Pileup << " // Pile-up: Interactions e/gamma e/gamma -> h per bunch" << endl;
-  file_out << n_chadrons_total << " //Total number of charged hadrons"<< endl;
+  file_out << n_chadrons_total << " //Total number of hadrons"<< endl;
   file_out << TMath::Sqrt((float)n_chadrons_total)/n_chadrons_total << " //error" << endl;
   
   file_out.close();
