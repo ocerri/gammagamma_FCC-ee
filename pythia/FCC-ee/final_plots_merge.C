@@ -30,8 +30,10 @@
 
 //Create histos-----------------------------------------------------
 
-TH1F* h_dsdpt10 = 0;
-TH1F* h_dsdpt30 = 0;
+TH1F* h_dsdeta90 = 0;
+TH1F* h_dsdeta160 = 0;
+TH1F* h_dsdeta240 = 0;
+TH1F* h_dsdeta350 = 0;
 
 ///Start merging procedure------------------------------------------
 void final_plots_merge(){

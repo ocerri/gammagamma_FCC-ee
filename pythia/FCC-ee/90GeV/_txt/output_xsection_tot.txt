@@ -4,5 +4,5 @@
 90 // [GeV] sqrt(s)
 899170 // [Hz] Production Rate (Sigma*Lum)
 0.0179599 // Pile-up: Interactions e/gamma e/gamma -> h per bunch
-307970 //Total number of charged hadrons
+307970 //Total number of hadrons
 0.00180196 //error
