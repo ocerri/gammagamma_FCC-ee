@@ -1,8 +1,8 @@
-10000 // Total event generated
-8179.74 // [pb] Pythia6 total cross section
-101082 // [pb] Cross section for e+e- --> gamma gamma --> X
+25000 // Total event generated
+8294.51 // [pb] Pythia6 total cross section
+102178 // [pb] Cross section for e+e- --> gamma gamma --> X
 90 // [GeV] sqrt(s)
-889521 // [Hz] Production Rate (Sigma*Lum)
-0.0177672 // Pile-up: Interactions e/gamma e/gamma -> h^+ per bunch
-123576 //Total number of charged hadrons
-0.00284468 //error
+899170 // [Hz] Production Rate (Sigma*Lum)
+0.0179599 // Pile-up: Interactions e/gamma e/gamma -> h per bunch
+307970 //Total number of charged hadrons
+0.00180196 //error
