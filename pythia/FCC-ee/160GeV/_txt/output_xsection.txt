@@ -1,6 +1,6 @@
 25000 // Total event generated
-13080.1 // [pb] Pythia6 total cross section
-91350.6 // [pb] Cross section for e+e- --> gamma gamma --> X
+13045.5 // [pb] Pythia6 total cross section
+90918.9 // [pb] Cross section for e+e- --> gamma gamma --> X
 160 // [GeV] sqrt(s)
-137026 // [Hz] Production Rate (Sigma*Lum)
-0.0101797 // Interactions e/gamma e/gamma -> h^+ per bunch
+136378 // [Hz] Production Rate (Sigma*Lum)
+0.0101316 // Interactions e/gamma e/gamma -> h^+ per bunch
