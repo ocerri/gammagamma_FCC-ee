@@ -36,17 +36,17 @@ TH1F* h_dsdeta240 = 0;
 TH1F* h_dsdeta350 = 0;
 
 ///Start merging procedure------------------------------------------
-void final_plots_merge(){
+void final_plots_merge_tot(){
 
  TFile* file90_dsdeta = new TFile("90GeV/_root/pythia6_gammagamma_hadrons_90GeV_seed479395139_Nevts25000_tot.root");
  h_dsdeta90 = (TH1F*)file90_dsdeta->Get("hdsigmadeta");
  h_dsdeta90->SetMarkerStyle(24);
  h_dsdeta90->SetMarkerColor(1);
  h_dsdeta90->SetLineColor(1);
- h_dsdeta90->SetAxisRange(0.001,40,"Y");
+ h_dsdeta90->SetAxisRange(0.001,60,"Y");
  h_dsdeta90->SetXTitle("#eta");
  h_dsdeta90->SetYTitle("d#sigma/d#eta [nb]");
- h_dsdeta90->SetTitle("PYTHIA simulation of d#sigma/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
+ h_dsdeta90->SetTitle("PYTHIA simulation of d#sigma/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h");
 
  TFile* file160_dsdeta = new TFile("160GeV/_root/pythia6_gammagamma_hadrons_160GeV_seed479395441_Nevts25000_tot.root");
  h_dsdeta160 = (TH1F*)file160_dsdeta->Get("hdsigmadeta");
