@@ -3,7 +3,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 350, int MSTP14_val=10) 
+void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 350, int MSTP14_val=10) 
 {
 
   //Luminosity and bunches definitions according to FCC-ee project specifications
