@@ -40,7 +40,7 @@ TH1F* h_id_part = 0;
 //TH1F* hEdsigmadpT = 0;
 //TNtuple* ntFFdsigmadeta = 0;
 
-//****creating a pdf for dsigmadpT fiting
+//****creating a pdf for dsigmadpT fitting
 
 Double_t pdf(Double_t *x, Double_t*par){
   Double_t _alpha = par[2];
@@ -111,21 +111,6 @@ bool passEvtSelection( TPythia6* pythia )
 
   //return true;  // ACCEPT ALL EVENTS
 
-  
-
-  bool cntTrack = false;
-
-  bool HFplus = false;
-  bool HFminus = false;
-
-  bool V0plus = false;
-  bool V0minus = false;
-
-  bool fwdTrackplus1 = false;
-  bool fwdTrackminus1 = false;
-  bool fwdTrackplus5 = false;
-  bool fwdTrackminus5 = false;
-
   TClonesArray* particleArray = (TClonesArray*)pythia->GetListOfParticles();
   int N = particleArray->GetEntriesFast();
 
@@ -157,44 +142,17 @@ bool passEvtSelection( TPythia6* pythia )
       py_tot += partic->Py();
     }
 
-    if ( charge!=0 && TMath::Abs(etaPart)<2. ) cntTrack = true;
-
-
-    if ( charge!=0 && etaPart>2.  && etaPart<5.6 ) fwdTrackplus5 = true;
-    if ( charge!=0 && etaPart<-2. && etaPart>-5.6 ) fwdTrackminus5 = true;
-
-    if ( charge!=0 && etaPart>1.5  && etaPart<5. ) fwdTrackplus1 = true;
-    if ( charge!=0 && etaPart<-1.5 && etaPart>-5. ) fwdTrackminus1 = true;
-
-    if ( etaPart> 2.9 && etaPart< 5.2 && enPart > 3. ) HFplus=true;
-    if ( etaPart<-2.9 && etaPart>-5.2 && enPart > 3. ) HFminus=true;
-
-    if ( etaPart>2.8 && etaPart<5.1 ) V0plus=true;
-    if ( etaPart<-1.7 && etaPart>-3.7 ) V0minus=true;
-
   }
 
   Double_t W_gen = TMath::Sqrt(EN_tot*EN_tot - px_tot*px_tot - py_tot*py_tot - pz_tot*pz_tot );
 
   hW->Fill(W_gen); //Fill the W histo
 
-  if (W_gen<35 && W_gen>5) return true; //Cut on W !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //  if (W_gen<35 && W_gen>5) return true; //Cut on W !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  
-//   // The minbias trigger was a two-arm trigger that required at least two
-//   // charged particles in opposite rapidity hemispheres in the range 1.5 < eta <5.5.
-//   if ( trigger.Contains("ua1") && (fwdTrackplus1==true && fwdTrackminus1==true ) ) return true;
+  return true;
 
-//   if ( trigger.Contains("ua5") && (fwdTrackplus5==true && fwdTrackminus5==true) ) return true;
-
-//   // One track within |eta|<2
-//   if ( trigger.Contains("aliceMB0") && (cntTrack==true) ) return true;
-//   // One particle in 2.8 < eta < 5.1 and one in -1.7 < eta < -3.7
-//   else if ( trigger.Contains("aliceMB") && (V0plus==true && V0minus==true)  ) return true;
-
-//   if ( trigger.Contains("cms") && (HFplus==true && HFminus==true) ) return true;
-
-  return false;
+  //return false;
 
 }
 
@@ -212,7 +170,6 @@ void book_histos()
 
   char title[300];  
   sprintf(title, "hdsigmadeta");
-  //hdsigmadeta = new TH1F(title,title,21,-10.5,10.5);
   hdsigmadeta = new TH1F(title,title,5,0,1.5);
   hdsigmadeta->SetXTitle("|#eta|");
   hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (nb)");
@@ -233,12 +190,6 @@ void book_histos()
   h_id_part->SetMarkerSize(1.4);
   h_id_part->SetMarkerStyle(33);
   h_id_part->Sumw2();
-
-  //   hdsigmadetaTruth = new TH1F("hdsigmadetaTruth","hdsigmadetaTruth",2000,-10,10);
-  //   hdsigmadetaTruth->SetXTitle("#eta_{MC truth}");
-  //   hdsigmadetaTruth->SetYTitle("d#sigma/d#eta [mb]");
-  //   hdsigmadetaTruth->SetMinimum(1.e-5);
-  //   hdsigmadetaTruth->Sumw2();
  
   sprintf(title, "hdsigmadpT");
   hdsigmadpT = new TH1F(title,title,n_bin_pt, pt_min , pt_max);
@@ -253,24 +204,6 @@ void book_histos()
   hW->SetYTitle("Nuymber of events");
   hW->SetMinimum(0.0001);
   hW->Sumw2();
-
-//   sprintf(title, "hEdsigmadpT");
-//   hEdsigmadpT = new TH1F(title,title,1000,0.,10.);
-//   hEdsigmadpT->SetXTitle("p_{T} (GeV/c)");
-//   hEdsigmadpT->SetYTitle("1/(2#pi p_{T})dsigma/dp_{T} (GeV/c)^{-2}");
-//   hEdsigmadpT->SetMinimum(0.0001);
-//   hEdsigmadpT->Sumw2();
-
-//   sprintf(title, "hmulteta1");
-//   hmulteta1 = new TH1F(title,title,1000,-0.5,999.5);
-//   hmulteta1->SetXTitle("N_{ch}");
-//   hmulteta1->SetYTitle("dsigma/dsigma_{ch}");
-//   hmulteta1->SetMinimum(0.00001);
-//   hmulteta1->Sumw2();
-
-  // Ntuple to store the FF=FF(z,ptPartic,pdgParton)
-  //sprintf(title, "ntFFdsigmadeta_z_ptpartic_pdgparton_subproc_%s");
-  //ntFFdsigmadeta = new TNtuple(title,title,"zT:z:pTpartic:Epartic:pdgparton");
 
   return;
 
