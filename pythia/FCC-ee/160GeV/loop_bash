@@ -1,0 +1,22 @@
+#!/bin/bash
+        #for i in $( ls ); do
+        #    echo item: $i
+        #done
+
+for i in {1..33}
+do
+    echo ciclo $i iniziato
+    echo
+    echo
+    root -l -q 'pythia6_gammagamma_hadrons.C++(10000,195.5,10)'
+    root -l -q 'pythia6_gammagamma_hadrons.C++(10000,195.5,30)'
+    echo
+    echo
+    echo
+    echo
+    echo ciclo $i finito
+    echo
+    echo
+    echo
+done
+
