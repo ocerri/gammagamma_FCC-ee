@@ -170,7 +170,7 @@ void book_histos()
 
   char title[300];  
   sprintf(title, "hdsigmadeta");
-  hdsigmadeta = new TH1F(title,title,5,0,1.5);
+  hdsigmadeta = new TH1F(title,title,20,-10.5,10.5);
   hdsigmadeta->SetXTitle("|#eta|");
   hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (nb)");
   hdsigmadeta->SetMinimum(0.0001);

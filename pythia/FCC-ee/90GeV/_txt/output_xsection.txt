@@ -4,3 +4,4 @@
 90 // [GeV] sqrt(s)
 452718 // [Hz] Production Rate (Sigma*Lum)
 0.00904255 // Interactions e/gamma e/gamma -> h^+ per bunch
+155209 //charged hadrons

@@ -3,7 +3,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 350, int MSTP14_val=10) 
+void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 90, int MSTP14_val=10) 
 {
 
   //Luminosity and bunches definitions according to FCC-ee project specifications
@@ -162,7 +162,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 350, int MSTP
 
       // Histo filling
       h_id_part->Fill(abs(pdg));
-      hdsigmadeta->Fill(abs(etaPartic));
+      hdsigmadeta->Fill(etaPartic);
       
       hdsigmadpT->Fill(ptPartic);
 
@@ -230,7 +230,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 50000, double sqrts = 350, int MSTP
   // **********************************************************************************  
   // Normalize histos by weighted cross-section, pseudorapidity range, and the pT bin size
        
-  double etabinsize = 1.5/5; // eta binning: 20 within -10<eta<10
+  double etabinsize = 20/20; // eta binning: 20 within -10<eta<10
   hdsigmadeta->Scale(1e-3*sigmaweight/etabinsize);
   double ptbinsize = (pt_max-pt_min)/n_bin_pt;
   hdsigmadpT->Scale(sigmaweight/ptbinsize);

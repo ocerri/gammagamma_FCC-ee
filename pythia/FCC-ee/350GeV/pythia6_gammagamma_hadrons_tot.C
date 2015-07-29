@@ -3,7 +3,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 90, int MSTP14_val=10) 
+void pythia6_gammagamma_hadrons_tot( int Nevts = 25000, double sqrts = 90, int MSTP14_val=10) 
 {
 
   //Luminosity and bunches definitions according to FCC-ee project specifications
@@ -144,9 +144,9 @@ void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 90, int MSTP1
 
       int pdg = part->GetKF();
       double charge = PDG->GetParticle(pdg)->Charge();
-      if(charge==0) continue; // only charged particles
+      //if(charge==0) continue; // also neutral particles
 
-      if ( abs(pdg)==11 || abs(pdg)==13 || abs(pdg)==15) continue;// no leptons
+      if ( abs(pdg)>10 && abs(pdg)<17) continue;// no leptons
       if (abs(pdg)==24) continue; //no W ....even if they should't
       //fly for 10 mm
 	
@@ -211,14 +211,16 @@ void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 90, int MSTP1
   Double_t Pileup = (N_rate*FCC_Circumference)/(N_bunch*speed_of_light);
 
   ofstream file_out;
-  file_out.open("_txt/output_xsection.txt");
+  file_out.open("_txt/output_xsection_tot.txt");
 
   file_out << Nevts-exclEvts << " // Total event generated" << endl;
   file_out << xsection << " // [pb] Pythia6 total cross section" << endl;
   file_out << total_chadrons_xsection << " // [pb] Cross section for e+e- --> gamma gamma --> X"<< endl;
   file_out << sqrts << " // [GeV] sqrt(s)" << endl;
   file_out << N_rate << " // [Hz] Production Rate (Sigma*Lum)" << endl;
-  file_out << Pileup << " // Interactions e/gamma e/gamma -> h^+ per bunch" << endl;
+  file_out << Pileup << " // Pile-up: Interactions e/gamma e/gamma -> h per bunch" << endl;
+  file_out << n_chadrons_total << " //Total number of charged hadrons"<< endl;
+  file_out << TMath::Sqrt((float)n_chadrons_total)/n_chadrons_total << " //error" << endl;
   
   file_out.close();
 
@@ -287,7 +289,7 @@ void pythia6_gammagamma_hadrons( int Nevts = 10000, double sqrts = 90, int MSTP1
   // Open  output file and Close file
     
   char filename[200];
-  sprintf(filename, "_root/pythia6_gammagamma_hadrons_%iGeV_seed%d_Nevts%d.root",(int)TMath::Ceil(sqrts),seed,Nevts);
+  sprintf(filename, "_root/pythia6_gammagamma_hadrons_%iGeV_seed%d_Nevts%d_tot.root",(int)TMath::Ceil(sqrts),seed,Nevts);
 
   TFile* file = TFile::Open(filename, "RECREATE");
   if (!file || !file->IsOpen()) {
