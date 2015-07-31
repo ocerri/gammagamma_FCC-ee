@@ -39,7 +39,7 @@ TH1F* h_dsdeta350 = 0;
 void final_plots_merge_tot_dNdeta(){
   // for _tot analysis-----------------------------
   Double_t xsection[]={8294.51,13027.4,17500.8,21962.6};
-  Double_t ntrials[]={307970/25000,351324/25000,380337/25000,414176/25000};
+  Double_t ntrials[]={1000,1000,1000,1000};
   Double_t total_hadrons[4];
 
  TFile* file90_dsdeta = new TFile("90GeV/_root/pythia6_gammagamma_hadrons_90GeV_seed479395139_Nevts25000_tot.root");
@@ -82,7 +82,7 @@ void final_plots_merge_tot_dNdeta(){
  h_dsdeta350->SetAxisRange(0.001,1200,"Y");
  h_dsdeta350->SetXTitle("#eta");
  h_dsdeta350->SetYTitle("dN/d#eta");
- h_dsdeta350->SetTitle("PYTHIA simulation of dN/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h");
+ h_dsdeta350->SetTitle("PYTHIA simulation of dN/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h, total generated event: 25000");
  h_dsdeta350->Scale(ntrials[3]/xsection[3]);
  total_hadrons[3]=h_dsdeta350->Integral();
 
@@ -98,7 +98,7 @@ void final_plots_merge_tot_dNdeta(){
  h_dsdeta90->Draw("same");
  h_dsdeta160->Draw("same");
  h_dsdeta240->Draw("same");
- 
+ c_dsdeta->SetLogy();
  c_dsdeta->SetGridx();
  c_dsdeta->SetGridy();
 
