@@ -3,7 +3,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_leptons( int Nevts = 25000, double sqrts = 90, int MSTP14_val=10) 
+void pythia6_gammagamma_leptons( int Nevts = 25000, double sqrts = 240, int MSTP14_val=10) 
 {
 
   //Luminosity and bunches definitions according to FCC-ee project specifications
