@@ -1,0 +1,11 @@
+1000 //   Total event generated
+6721.44 //   [pb] Pythia6 total cross section
+14135.2 //   [pb] Cross section for e+e- --> gamma gamma --> l
+90 //   [GeV] sqrt(s)
+2103 //   Total Lepton produced
+3957.86 //   [Hz] Production Rate (Sigma*Lum)
+30390.7 //   [Hz] Production Rate (Sigma*Lum) (Crab waist)
+
+
+7.90538e-05 //   Interactions e/gamma e/gamma -> l per bunch
+0.000170142 //   Interactions e/gamma e/gamma -> l per bunch (Crab Waist)

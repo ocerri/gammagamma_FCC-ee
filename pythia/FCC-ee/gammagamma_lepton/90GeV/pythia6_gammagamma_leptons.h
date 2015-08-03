@@ -34,7 +34,7 @@ TDatabasePDG *PDG = 0;
 TH1F* hdsigmadeta = 0;
 TH1F* hdNdeta = 0;
 TH1F* hdsigmadpT = 0;
-TH1F* h_had_per_ev = 0;
+TH1F* h_lep_per_ev = 0;
 TH1F* hW = 0;
 TH1F* h_id_part = 0;
 
@@ -173,26 +173,26 @@ void book_histos()
   sprintf(title, "hdsigmadeta");
   hdsigmadeta = new TH1F(title,title,20,-10.5,10.5);
   hdsigmadeta->SetXTitle("|#eta|");
-  hdsigmadeta->SetYTitle("d#sigma_{ch}/d|#eta| (nb)");
+  hdsigmadeta->SetYTitle("d#sigma/d|#eta| (nb)");
   hdsigmadeta->SetMinimum(0.0001);
   hdsigmadeta->Sumw2();
 
-  sprintf(title, "hdNdeta");
-  hdNdeta = new TH1F(title,title,20,-10.5,10.5);
-  hdNdeta->SetXTitle("|#eta|");
-  hdNdeta->SetYTitle("d#N_{ch}/d|#eta| (nb)");
-  hdNdeta->SetMinimum(0.0001);
-  hdNdeta->Sumw2();
+  /* sprintf(title, "hdNdeta"); */
+  /* hdNdeta = new TH1F(title,title,20,-10.5,10.5); */
+  /* hdNdeta->SetXTitle("|#eta|"); */
+  /* hdNdeta->SetYTitle("d#N_{ch}/d|#eta| (nb)"); */
+  /* hdNdeta->SetMinimum(0.0001); */
+  /* hdNdeta->Sumw2(); */
 
-  sprintf(title, "h_hadrons_per_event");
-  h_had_per_ev = new TH1F(title,title,20,0,20);
-  h_had_per_ev->SetXTitle("Number of charged hadrons per event");
-  h_had_per_ev->SetYTitle("Number of events");
-  h_had_per_ev->SetMinimum(0.000001);
-  h_had_per_ev->Sumw2();
+  sprintf(title, "h_leptons_per_event");
+  h_lep_per_ev = new TH1F(title,title,20,0,20);
+  h_lep_per_ev->SetXTitle("Number of leptons per event");
+  h_lep_per_ev->SetYTitle("Number of events");
+  h_lep_per_ev->SetMinimum(0.000001);
+  h_lep_per_ev->Sumw2();
 
   sprintf(title, "h_id_particle");
-  h_id_part = new TH1F(title,title,5000,0,5000);
+  h_id_part = new TH1F(title,title,2000,0,2000);
   h_id_part->SetXTitle("Particle id");
   h_id_part->SetYTitle("Number particle detected");
   h_id_part->SetMarkerSize(1.4);
