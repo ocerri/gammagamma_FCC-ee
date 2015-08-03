@@ -1,0 +1,1 @@
+Testing the same macro without using the “lepton/gamma” option
