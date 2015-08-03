@@ -30,72 +30,77 @@
 
 //Create histos-----------------------------------------------------
 
-TH1F* h_dsdeta90 = 0;
-TH1F* h_dsdeta160 = 0;
-TH1F* h_dsdeta240 = 0;
-TH1F* h_dsdeta350 = 0;
+TH1F* h_dNdeta90 = 0;
+TH1F* h_dNdeta160 = 0;
+TH1F* h_dNdeta240 = 0;
+TH1F* h_dNdeta350 = 0;
 
 ///Start merging procedure------------------------------------------
 void final_plots_merge(){
+  Double_t total_leptons[4];
 
- TFile* file90_dsdeta = new TFile("90GeV/_root/pythia6_gammagamma_hadrons_90GeV_seed479395016_Nevts25000.root");
- h_dsdeta90 = (TH1F*)file90_dsdeta->Get("hdsigmadeta");
- h_dsdeta90->SetMarkerStyle(24);
- h_dsdeta90->SetMarkerColor(1);
- h_dsdeta90->SetLineColor(1);
- h_dsdeta90->SetAxisRange(0.001,30,"Y");
- h_dsdeta90->SetXTitle("#eta");
- h_dsdeta90->SetYTitle("d#sigma_{ch}/d#eta [nb]");
- h_dsdeta90->SetTitle("PYTHIA simulation of d#sigma_{ch}/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
+ TFile* file90_dNdeta = new TFile("90GeV/_root/pythia6_gammagamma_leptons_90GeV_seed479533328_Nevts10000.root");
+ h_dNdeta90 = (TH1F*)file90_dNdeta->Get("hdNdeta");
+ h_dNdeta90->SetMarkerStyle(24);
+ h_dNdeta90->SetMarkerColor(1);
+ h_dNdeta90->SetLineColor(1);
+ h_dNdeta90->SetAxisRange(0.001,0.15,"Y");
+ h_dNdeta90->SetXTitle("#eta");
+ h_dNdeta90->SetYTitle("dN/d#eta (per event)");
+ h_dNdeta90->SetTitle("PYTHIA simulation of dN/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow l^{#pm}, total generated event: 10000");
+ total_leptons[0]=h_dNdeta90->Integral();
 
- TFile* file160_dsdeta = new TFile("160GeV/_root/pythia6_gammagamma_hadrons_160GeV_seed479395646_Nevts25000.root");
- h_dsdeta160 = (TH1F*)file160_dsdeta->Get("hdsigmadeta");
- h_dsdeta160->SetMarkerStyle(25);
- h_dsdeta160->SetMarkerColor(2);
- h_dsdeta160->SetLineColor(2);
- h_dsdeta160->SetAxisRange(0.001,45,"Y");
- h_dsdeta160->SetTitle("PYTHIA simulation of d#sigma/#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
+ TFile* file160_dNdeta = new TFile("160GeV/_root/pythia6_gammagamma_leptons_160GeV_seed479533187_Nevts10000.root");
+ h_dNdeta160 = (TH1F*)file160_dNdeta->Get("hdNdeta");
+ h_dNdeta160->SetMarkerStyle(25);
+ h_dNdeta160->SetMarkerColor(2);
+ h_dNdeta160->SetLineColor(2);
+ //h_dNdeta160->SetAxisRange(0.001,45,"Y");
+ h_dNdeta160->SetTitle("PYTHIA simulation of dN/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow l^{#pm}");
+ total_leptons[1]=h_dNdeta160->Integral();
 
- TFile* file240_dsdeta = new TFile("240GeV/_root/pythia6_gammagamma_hadrons_240GeV_seed479395489_Nevts25000.root");
- h_dsdeta240 = (TH1F*)file240_dsdeta->Get("hdsigmadeta");
- h_dsdeta240->SetMarkerStyle(26);
- h_dsdeta240->SetMarkerColor(3);
- h_dsdeta240->SetLineColor(3);
- h_dsdeta240->SetAxisRange(0.001,45,"Y");
- h_dsdeta240->SetTitle("PYTHIA simulation of d#sigma/#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
+ TFile* file240_dNdeta = new TFile("240GeV/_root/pythia6_gammagamma_leptons_240GeV_seed479533073_Nevts10000.root");
+ h_dNdeta240 = (TH1F*)file240_dNdeta->Get("hdNdeta");
+ h_dNdeta240->SetMarkerStyle(26);
+ h_dNdeta240->SetMarkerColor(3);
+ h_dNdeta240->SetLineColor(3);
+ //h_dNdeta240->SetAxisRange(0.001,45,"Y");
+ h_dNdeta240->SetTitle("PYTHIA simulation of dN/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow l^{#pm}");
+ total_leptons[2]=h_dNdeta240->Integral();
 
- TFile* file350_dsdeta = new TFile("350GeV/_root/pythia6_gammagamma_hadrons_350GeV_seed479395808_Nevts25000.root");
- h_dsdeta350 = (TH1F*)file350_dsdeta->Get("hdsigmadeta");
- h_dsdeta350->SetMarkerStyle(27);
- h_dsdeta350->SetMarkerColor(4);
- h_dsdeta350->SetLineColor(4);
- h_dsdeta350->SetAxisRange(0.001,45,"Y");
- h_dsdeta350->SetTitle("PYTHIA simulation of d#sigma/#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow h^{#pm}");
+ TFile* file350_dNdeta = new TFile("350GeV/_root/pythia6_gammagamma_leptons_350GeV_seed479533325_Nevts10000.root");
+ h_dNdeta350 = (TH1F*)file350_dNdeta->Get("hdNdeta");
+ h_dNdeta350->SetMarkerStyle(27);
+ h_dNdeta350->SetMarkerColor(4);
+ h_dNdeta350->SetLineColor(4);
+ //h_dNdeta350->SetAxisRange(0.001,45,"Y");
+ h_dNdeta350->SetTitle("PYTHIA simulation of dN/d#eta for e^{+}e^{-}#rightarrow e^{+}e^{-}/#gamma*#gamma* #rightarrow l^{#pm}");
+ total_leptons[3]=h_dNdeta350->Integral();
 
  
 
  //Draw on Canvas---------------------------------------------------
    
- TCanvas* c_dsdeta = new TCanvas("c_dsdeta","dsdeta",700,700);
+ TCanvas* c_dNdeta = new TCanvas("c_dNdeta","dNdeta",700,700);
  //gStyle->SetOptStat(0);
- c_dsdeta->cd();
+ c_dNdeta->cd();
 
- h_dsdeta90->Draw();
- h_dsdeta160->Draw("same");
- h_dsdeta240->Draw("same");
- h_dsdeta350->Draw("same");
+ h_dNdeta90->Draw();
+ h_dNdeta160->Draw("same");
+ h_dNdeta240->Draw("same");
+ h_dNdeta350->Draw("same");
  
- c_dsdeta->SetGridx();
- c_dsdeta->SetGridy();
+ c_dNdeta->SetGridx();
+ c_dNdeta->SetGridy();
 
  //Building Legend-----------------------------------------------------
 
  TLegend* leg = new TLegend(0.1,0.7,0.48,0.9);
  //leg->SetHeader("Legend");
- leg->AddEntry(h_dsdeta90,"#sqrt{s}=90","lep");
- leg->AddEntry(h_dsdeta160,"#sqrt{s}=160","lep");
- leg->AddEntry(h_dsdeta240,"#sqrt{s}=240","lep");
- leg->AddEntry(h_dsdeta350,"#sqrt{s}=350","lep");
+ leg->AddEntry(h_dNdeta90,Form("#sqrt{s}=90,  %.2f charged leptons",total_leptons[0]),"lep");
+ leg->AddEntry(h_dNdeta160,Form("#sqrt{s}=160,  %.2f charged leptons",total_leptons[1]),"lep");
+ leg->AddEntry(h_dNdeta240,Form("#sqrt{s}=240,  %.2f charged leptons",total_leptons[2]),"lep");
+ leg->AddEntry(h_dNdeta350,Form("#sqrt{s}=350,  %.2f charged leptons",total_leptons[3]),"lep");
  leg->Draw();
 cout <<"ciao" << endl;
 
@@ -104,12 +109,12 @@ cout <<"ciao" << endl;
 
 
  // the following line is needed to avoid that the automatic redrawing of stats
- h_dsdeta90->SetStats(0);
- h_dsdeta160->SetStats(0);
- h_dsdeta240->SetStats(0);
- h_dsdeta350->SetStats(0);
+ h_dNdeta90->SetStats(0);
+ h_dNdeta160->SetStats(0);
+ h_dNdeta240->SetStats(0);
+ h_dNdeta350->SetStats(0);
 
- c_dsdeta->Modified();
+ c_dNdeta->Modified();
 
 
 }
