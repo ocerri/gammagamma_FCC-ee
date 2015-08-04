@@ -1,4 +1,0 @@
-      subroutine inpdf
-
-      return
-      end
