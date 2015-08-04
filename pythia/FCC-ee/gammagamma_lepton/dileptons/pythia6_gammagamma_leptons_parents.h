@@ -109,6 +109,8 @@ void dumpEvent( TPythia6* pythia )
 
 bool passEvtSelection( TPythia6* pythia )
 {
+  Int_t n_final_particle=0;
+  Int_t n_muons =0;
 
   //return true;  // ACCEPT ALL EVENTS
 
@@ -131,6 +133,8 @@ bool passEvtSelection( TPythia6* pythia )
     int pdg = part->GetKF();
     double charge = PDG->GetParticle(pdg)->Charge();
 
+    if (pdg == 13) n_muons++;
+
     TParticle *partic = (TParticle*)TMCParticle2TParticle(part);
 
     double etaPart = partic->Eta();
@@ -143,13 +147,16 @@ bool passEvtSelection( TPythia6* pythia )
       py_tot += partic->Py();
     }
 
+    n_final_particle++;
+
   }
 
   Double_t W_gen = TMath::Sqrt(EN_tot*EN_tot - px_tot*px_tot - py_tot*py_tot - pz_tot*pz_tot );
 
   hW->Fill(W_gen); //Fill the W histo
 
-  //  if (W_gen<35 && W_gen>5) return true; //Cut on W !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  if (n_final_particle > 4) return false;
+  if (n_muons!=2) return false;
 
   return true;
 

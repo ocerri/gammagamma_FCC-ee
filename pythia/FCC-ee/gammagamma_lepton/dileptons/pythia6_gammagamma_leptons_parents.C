@@ -3,7 +3,7 @@
 //____________________________________________________________________
 //
 
-void pythia6_gammagamma_leptons_parents( int Nevts = 10000, double sqrts = 90, int MSTP14_val=10) 
+void pythia6_gammagamma_leptons_parents( int Nevts = 5000, double sqrts = 90, int MSTP14_val=10) 
 {
 
   //Luminosity and bunches definitions according to FCC-ee project specifications
@@ -124,12 +124,6 @@ void pythia6_gammagamma_leptons_parents( int Nevts = 10000, double sqrts = 90, i
     // Generate event
 
     pythia->GenerateEvent();
-    
-    // ***********************************************************************************************
-    // Check if event passes trigger selection
-    // 
-    //  if (debug) cout << "############ EVENT " << ievt << " #############" << endl;
-    //	dumpEvent( pythia );
 
     if ( passEvtSelection(pythia)==false ) { ///Cut on W!!!!!!!!!!!!!!!
       exclEvts++;
@@ -154,14 +148,14 @@ void pythia6_gammagamma_leptons_parents( int Nevts = 10000, double sqrts = 90, i
       if (status!=1) continue; // Only consider final-state particles
 
       int parent_id = part->GetParent();
-      if (parent_id != 22) continue; //Only consider particles coming from photons
+      //if (parent_id != 22) continue; //Only consider particles coming from photons
 
       int pdg = part->GetKF();
       double charge = PDG->GetParticle(pdg)->Charge();
       if(charge==0) continue; // only charged particles
 
-      if ( abs(pdg)!=11 && abs(pdg)!=13 && abs(pdg)!=15) continue;// only leptons
-      
+      //if ( abs(pdg)!=11 && abs(pdg)!=13 ) continue;// only leptons
+      if ( abs(pdg)!=13 ) continue;// only muons
 
       partic = (TParticle*)TMCParticle2TParticle(part);
       double ptPartic = partic->Pt();
