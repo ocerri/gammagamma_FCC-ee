@@ -1,0 +1,1 @@
+These macros are not wrong in absolute (they work well) but are wrong in the sense that look for leptons in hadronic (QCD) gamma/gamma events. We instead wanted to evaluate leptonic pileup in QED gamma/gamma events.
